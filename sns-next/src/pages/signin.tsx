@@ -1,13 +1,13 @@
 import type { NextPage } from 'next'
 import Link from 'next/link'
 
-const Home: NextPage = () => {
+const SignIn: NextPage = () => {
   return (
     <div>
-      <p>top</p>
+      <p>SignIn</p>
       <ul>
         <li>
-          <Link href="/signin">SignIn</Link>
+          <Link href="/">Home</Link>
         </li>
         <li>
           <Link href="/signup">SignUp</Link>
@@ -17,4 +17,4 @@ const Home: NextPage = () => {
   )
 }
 
-export default Home
+export default SignIn
