@@ -3,13 +3,27 @@ import Link from 'next/link'
 import { auth } from '../auth/firebase'
 import { signOut } from 'firebase/auth'
 import { useRouter } from 'next/router'
+import { useAuthContext } from 'contexts/AuthContext'
 
 const Home: NextPage = () => {
+  // routerオブジェクト作成
   const router = useRouter()
 
-  const handleLogout = async () => {
+  // contextで管理している値を取得
+  const { user } = useAuthContext()
+
+  // ログアウトの関数を定義
+  const logout = async () => {
+    // firebaseで用意されている、ログアウトの関数
     await signOut(auth)
+
+    // /signupにリダイレクト
     await router.push('/signin')
+  }
+
+  // ユーザーがnullまたはundefinedでない時のreturn（ログインしている）
+  if (!user) {
+    return <p>loading</p>
   }
 
   return (
@@ -23,7 +37,7 @@ const Home: NextPage = () => {
           <Link href="/signup">SignUp</Link>
         </li>
         <li>
-          <button onClick={handleLogout}>ログアウト</button>
+          <button onClick={logout}>ログアウト</button>
         </li>
       </ul>
     </div>

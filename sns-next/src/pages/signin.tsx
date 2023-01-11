@@ -6,25 +6,28 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import { useRouter } from 'next/router'
 
 const SignIn: NextPage = () => {
+  // routerオブジェクト作成
   const router = useRouter()
 
-  const handleSubmit = async (e: EventType) => {
+  const signIn = async (e: EventType) => {
     e.preventDefault()
 
+    // メールフォームの値を取得
     const emailInput = e.currentTarget.querySelector(
       'input[name="email"]'
     ) as HTMLInputElement
     const emailValue = emailInput.value
-    console.log(emailValue)
 
+    // パスワードフォームの値を取得
     const passwordInput = e.currentTarget.querySelector(
       'input[name="password"]'
     ) as HTMLInputElement
     const passwordValue = passwordInput.value
-    console.log(passwordValue)
 
+    // firebaseで用意されている、ログインの関数
     await signInWithEmailAndPassword(auth, emailValue, passwordValue)
 
+    // /にリダイレクト
     router.push('/')
   }
 
@@ -33,7 +36,7 @@ const SignIn: NextPage = () => {
       <p>SignIn</p>
       <div>
         <h1>ログイン</h1>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={signIn}>
           <div>
             <label htmlFor="email">メールアドレス</label>
             <input id="email" name="email" type="email" placeholder="email" />
@@ -48,9 +51,6 @@ const SignIn: NextPage = () => {
         </form>
       </div>
       <ul>
-        <li>
-          <Link href="/">Home</Link>
-        </li>
         <li>
           <Link href="/signup">SignUp</Link>
         </li>
