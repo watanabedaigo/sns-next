@@ -1,7 +1,17 @@
 import type { NextPage } from 'next'
 import Link from 'next/link'
+import { auth } from '../auth/firebase'
+import { signOut } from 'firebase/auth'
+import { useRouter } from 'next/router'
 
 const Home: NextPage = () => {
+  const router = useRouter()
+
+  const handleLogout = async () => {
+    await signOut(auth)
+    await router.push('/signin')
+  }
+
   return (
     <div>
       <p>top</p>
@@ -11,6 +21,9 @@ const Home: NextPage = () => {
         </li>
         <li>
           <Link href="/signup">SignUp</Link>
+        </li>
+        <li>
+          <button onClick={handleLogout}>ログアウト</button>
         </li>
       </ul>
     </div>
