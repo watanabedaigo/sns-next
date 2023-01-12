@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "id": "user1 id",
+      "name": "user1 name",
+      "profile": "user1 profile",
+      "favoritePostId": [],
+      "followUserId": [],
+      "follwedUserId": []
+    }
+  ],
+  "posts": [
+    {
+      "id": "post1 id",
+      "content": "post1 content",
+      "addFavoriteUserId": [],
+      "userId": "post1 userId"
+    }
+  ]
+}

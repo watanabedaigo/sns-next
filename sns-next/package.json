@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint --ext .ts,.tsx src",
     "lint:fix": "eslint --ext .ts,.tsx src --fix",
-    "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json,css}'"
+    "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json,css}'",
+    "json-server": "json-server --watch db.json --port 3001"
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^5.48.1",
