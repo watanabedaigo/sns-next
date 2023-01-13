@@ -10,7 +10,7 @@ const Home: NextPage = () => {
   const router = useRouter()
 
   // contextで管理している値を取得
-  const { user } = useAuthContext()
+  const { firebaseUser } = useAuthContext()
 
   // ログアウトの関数を定義
   const logout = async () => {
@@ -22,7 +22,7 @@ const Home: NextPage = () => {
   }
 
   // ユーザーがnullまたはundefinedでない時のreturn（ログインしている）
-  if (!user) {
+  if (!firebaseUser) {
     return <p>loading</p>
   }
 
@@ -30,12 +30,6 @@ const Home: NextPage = () => {
     <div>
       <p>top</p>
       <ul>
-        <li>
-          <Link href="/signin">SignIn</Link>
-        </li>
-        <li>
-          <Link href="/signup">SignUp</Link>
-        </li>
         <li>
           <button onClick={logout}>ログアウト</button>
         </li>

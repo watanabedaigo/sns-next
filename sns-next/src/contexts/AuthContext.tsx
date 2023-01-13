@@ -12,7 +12,7 @@ import type { UserType } from 'types/UserType'
 
 // 型エイリアス
 export type AuthContextProps = {
-  user: UserType
+  firebaseUser: UserType
 }
 
 export type AuthProviderProps = {
@@ -34,7 +34,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   // State
   // ログインしているユーザーを扱う
-  const [user, setUser] = useState<UserType>(null)
+  const [firebaseUser, setFirebaseUser] = useState<UserType>(null)
 
   // ログインしていないユーザーが見ることのできるページを変数で管理
   const pageForNotLogin =
@@ -42,7 +42,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   // contextで管理する値を定義
   const value = {
-    user,
+    firebaseUser,
   }
 
   // useEffect
@@ -50,12 +50,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     // firebaseで用意されている、ログイン情報が変わると発火するonAuthStateChanged
     const authStateChanged = onAuthStateChanged(auth, async (user) => {
       // State更新
-      setUser(user)
+      setFirebaseUser(user)
 
       // ユーザーがnullまたはundefinedでなく（ログインしている）
       // アクセスしているページのURLがpageForNotLoginでない時（ログイン後にしか見ることのできないページ）
       // /signupにリダイレクト
-      !user && !pageForNotLogin && (await router.push('/signup'))
+      !firebaseUser && !pageForNotLogin && (await router.push('/signup'))
     })
     return () => {
       authStateChanged()

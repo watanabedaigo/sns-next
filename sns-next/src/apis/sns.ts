@@ -7,10 +7,6 @@ import { PostsType } from 'types/PostsType'
 type allDataType = UsersType[] | PostsType[]
 type dataType = UsersType | PostsType
 
-// APIリクエスト先のURL
-// const usersUrl = 'http://localhost:3001/users'
-// const postsUrl = 'http://localhost:3001/posts'
-
 // GET
 export const getData = async (targetUrl: string) => {
   const response = await axios.get(targetUrl)
@@ -19,7 +15,7 @@ export const getData = async (targetUrl: string) => {
 }
 
 // POST
-export const postData = async (targetUrl: string, newPost: PostsType) => {
+export const postData = async (targetUrl: string, newPost: dataType) => {
   const response = await axios.post(targetUrl, newPost)
   const newData: dataType = response.data
   return newData
@@ -29,7 +25,7 @@ export const postData = async (targetUrl: string, newPost: PostsType) => {
 export const putData = async (
   targetUrl: string,
   id: string,
-  targetPost: PostsType
+  targetPost: dataType
 ) => {
   const response = await axios.put(`${targetUrl}/${id}`, targetPost)
   const updatedData: dataType = response.data
