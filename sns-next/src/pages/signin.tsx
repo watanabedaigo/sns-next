@@ -46,7 +46,7 @@ const SignIn: NextPage = () => {
             <input id="password" name="password" type="password" />
           </div>
           <div>
-            <button>登録</button>
+            <button>ログイン</button>
           </div>
         </form>
       </div>
