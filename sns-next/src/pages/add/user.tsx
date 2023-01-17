@@ -51,7 +51,6 @@ const AddUserInfo: NextPage = () => {
 
   return (
     <div>
-      <p>AddUserInfo</p>
       <div>
         <h1>アカウント情報追加</h1>
         <form onSubmit={addInfo}>
