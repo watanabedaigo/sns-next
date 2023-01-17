@@ -1,11 +1,11 @@
 import axios from 'axios'
-import { UsersType } from 'types/UsersType'
-import { PostsType } from 'types/PostsType'
+import { JsonUserType } from 'types/JsonUserType'
+import { PostType } from 'types/PostType'
 
 // 型エイリアス
 // 合併型
-type allDataType = UsersType[] | PostsType[]
-type dataType = UsersType | PostsType
+type allDataType = JsonUserType[] | PostType[]
+type dataType = JsonUserType | PostType
 
 // GET
 export const getData = async (targetUrl: string) => {

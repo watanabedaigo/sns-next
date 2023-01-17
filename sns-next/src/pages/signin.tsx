@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import type { EventType } from 'types/EventType'
 import Link from 'next/link'
-import { auth } from '../auth/firebase'
+import { auth } from 'auth/firebase'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { useRouter } from 'next/router'
 
