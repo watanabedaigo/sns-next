@@ -1,10 +1,12 @@
 import type { NextPage } from 'next'
 import type { EventType } from 'types/EventType'
 import Link from 'next/link'
-import { auth } from '../auth/firebase'
+import { auth } from 'auth/firebase'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { useRouter } from 'next/router'
 import { postData } from 'apis/sns'
+import { useAuthContext } from 'contexts/AuthContext'
+import type { JsonUserType } from 'types/JsonUserType'
 
 const SignUp: NextPage = () => {
   // routerオブジェクト作成
@@ -12,6 +14,9 @@ const SignUp: NextPage = () => {
 
   // APIリクエスト先のURL
   const usersUrl = 'http://localhost:3001/users'
+
+  // contextで管理している値を取得
+  const { jsonUsers, setJsonUsers } = useAuthContext()
 
   const signUp = async (e: EventType) => {
     e.preventDefault()
@@ -47,13 +52,18 @@ const SignUp: NextPage = () => {
 
         // Create（Users）
         postData(usersUrl, newJsonUser)
+
+        // State更新
+        if (jsonUsers) {
+          setJsonUsers([...jsonUsers, newJsonUser])
+        }
       })
       .catch((Error) => {
         console.log(Error)
       })
 
-    // /にリダイレクト
-    router.push('/')
+    // /add/userにリダイレクト
+    router.push('/add/user')
   }
 
   return (
