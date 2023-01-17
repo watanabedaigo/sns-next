@@ -54,16 +54,15 @@ const SignUp: NextPage = () => {
         postData(usersUrl, newJsonUser)
 
         // State更新
-        if (jsonUsers) {
-          setJsonUsers([...jsonUsers, newJsonUser])
-        }
+        jsonUsers && setJsonUsers([...jsonUsers, newJsonUser])
+      })
+      .then(() => {
+        // /add/userにリダイレクト
+        router.push('/add/user')
       })
       .catch((Error) => {
         console.log(Error)
       })
-
-    // /add/userにリダイレクト
-    router.push('/add/user')
   }
 
   return (
@@ -85,11 +84,6 @@ const SignUp: NextPage = () => {
           </div>
         </form>
       </div>
-      <ul>
-        <li>
-          <Link href="/signin">SignIn</Link>
-        </li>
-      </ul>
     </div>
   )
 }

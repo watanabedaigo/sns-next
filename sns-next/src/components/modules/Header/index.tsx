@@ -4,14 +4,21 @@ import { auth } from 'auth/firebase'
 import { signOut } from 'firebase/auth'
 import { useRouter } from 'next/router'
 import type { JsonUserType } from 'types/JsonUserType'
+import Link from 'next/link'
+import { deleteData } from 'apis/sns'
 
 // メモ化して。親コンポーネントレンダリングによる再レンダリング防止
 const Header: React.FC = React.memo(() => {
   // routerオブジェクト作成
   const router = useRouter()
 
+  // APIリクエスト先のURL
+  const usersUrl = 'http://localhost:3001/users'
+
   // contextで管理している値を取得
-  const { firebaseUser, jsonUsers } = useAuthContext()
+  const { firebaseUser, jsonUsers, setJsonUsers } = useAuthContext()
+
+  console.log(jsonUsers)
 
   // ログインしているfirebaseUserのuidをもとに、jsonUsersの中からログインしているユーザーデータを特定
   const targetJsonUser = jsonUsers?.find((jsonUser) => {
@@ -23,8 +30,37 @@ const Header: React.FC = React.memo(() => {
     // firebaseで用意されている、ログアウトの関数
     await signOut(auth)
 
-    // /signupにリダイレクト
+    // /signinにリダイレクト
     await router.push('/signin')
+  }
+
+  // ユーザー削除の関数を定義
+  const deleteUser = async () => {
+    // firebase側のユーザー削除
+    // thenを使うことで、firebase側のユーザー削除が完了した後に実行する処理を指定する
+    firebaseUser
+      ?.delete()
+      .then(() => {
+        // json-server側のユーザー削除
+        // 削除するユーザーのidを取得
+        const deleteTargetUserId = targetJsonUser.id
+        // Delete（Users）
+        deleteData(usersUrl, deleteTargetUserId)
+
+        // State更新
+        // idプロパティの値がdeleteTargetUserIdではないデータのみ抽出
+        const newUsers = jsonUsers?.filter((jsonUser) => {
+          return jsonUser.id !== deleteTargetUserId
+        })
+        newUsers && setJsonUsers([...newUsers])
+      })
+      .then(() => {
+        // /signinにリダイレクト
+        router.push('/signin')
+      })
+      .catch((Error) => {
+        console.log(Error)
+      })
   }
 
   if (router.pathname === '/add/user') {
@@ -34,11 +70,36 @@ const Header: React.FC = React.memo(() => {
       </header>
     )
   }
-
   return (
     <header>
-      <p>{targetJsonUser ? targetJsonUser.name : 'ログインしていない'}</p>
-      {firebaseUser && <button onClick={logout}>ログアウト</button>}
+      {firebaseUser && targetJsonUser ? (
+        // ログインしている時の表示
+        <div>
+          <ul>
+            <li>
+              <p>アカウント名：{targetJsonUser.name}</p>
+            </li>
+            <li>
+              <button onClick={logout}>ログアウト</button>
+            </li>
+            <li>
+              <button onClick={deleteUser}>アカウント削除</button>
+            </li>
+          </ul>
+        </div>
+      ) : (
+        // ログインしていない時の表示
+        <div>
+          <ul>
+            <li>
+              <Link href="/signin">SignIn</Link>
+            </li>
+            <li>
+              <Link href="/signup">SignUp</Link>
+            </li>
+          </ul>
+        </div>
+      )}
     </header>
   )
 })

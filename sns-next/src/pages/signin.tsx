@@ -50,11 +50,6 @@ const SignIn: NextPage = () => {
           </div>
         </form>
       </div>
-      <ul>
-        <li>
-          <Link href="/signup">SignUp</Link>
-        </li>
-      </ul>
     </div>
   )
 }

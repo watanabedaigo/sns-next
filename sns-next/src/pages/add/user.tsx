@@ -42,7 +42,7 @@ const AddUserInfo: NextPage = () => {
       targetJsonUser.profile = profileValue
 
       // Update（Users）
-      putData(usersUrl, firebaseUser.uid, targetJsonUser)
+      putData(usersUrl, targetJsonUser.id, targetJsonUser)
     }
 
     // /にリダイレクト
