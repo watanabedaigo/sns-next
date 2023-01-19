@@ -7,7 +7,7 @@ import {
 } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from 'auth/firebase'
-import { FirebaseUserType } from 'types/firebaseUserType'
+import { FirebaseUserType } from 'types/FirebaseUserType'
 import type { JsonUserType } from 'types/JsonUserType'
 import { getData } from 'apis/sns'
 

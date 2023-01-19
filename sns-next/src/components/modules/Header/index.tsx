@@ -83,6 +83,11 @@ const Header: React.FC = React.memo(() => {
               <button onClick={logout}>ログアウト</button>
             </li>
             <li>
+              <Link href={`/edit/user/${targetJsonUser.name}`}>
+                アカウント修正
+              </Link>
+            </li>
+            <li>
               <button onClick={deleteUser}>アカウント削除</button>
             </li>
           </ul>

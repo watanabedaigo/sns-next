@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import type { NextPage } from 'next'
 import type { EventType } from 'types/EventType'
 import Link from 'next/link'
@@ -16,6 +17,15 @@ const AddUserInfo: NextPage = () => {
   // contextで管理している値を取得
   const { firebaseUser, jsonUsers } = useAuthContext()
 
+  // ログインしているfirebaseUserのuidをもとに、jsonUsersの中からログインしているユーザーデータを特定
+  const targetJsonUser = jsonUsers?.find((jsonUser) => {
+    return jsonUser.id === firebaseUser?.uid
+  }) as JsonUserType
+
+  // formの初期表示を格納する変数を定義
+  let nameDefaultValue: string | number = targetJsonUser.name
+  let profileDefaultValue: string | number = targetJsonUser.profile
+
   const addInfo = (e: EventType) => {
     e.preventDefault()
 
@@ -30,6 +40,8 @@ const AddUserInfo: NextPage = () => {
       'input[name="profile"]'
     ) as HTMLInputElement
     const profileValue = profileInput.value
+
+    console.log({ nameValue, profileValue })
 
     if (jsonUsers && firebaseUser) {
       // ログインしているfirebaseUserのuidをもとに、jsonUsersの中からログインしているユーザーデータを特定
@@ -49,12 +61,10 @@ const AddUserInfo: NextPage = () => {
     router.push('/')
   }
 
-  let name = 'test'
-
   return (
     <div>
       <div>
-        <h1>アカウント情報追加</h1>
+        <h1>アカウント情報修正</h1>
         <form onSubmit={addInfo}>
           <div>
             <label htmlFor="email">名前</label>
@@ -63,7 +73,7 @@ const AddUserInfo: NextPage = () => {
               name="name"
               type="text"
               placeholder="name"
-              defaultValue={name}
+              defaultValue={nameDefaultValue}
             />
           </div>
           <div>
@@ -73,10 +83,11 @@ const AddUserInfo: NextPage = () => {
               name="profile"
               type="text"
               placeholder="profile"
+              defaultValue={profileDefaultValue}
             />
           </div>
           <div>
-            <button>登録</button>
+            <button>修正</button>
           </div>
         </form>
       </div>
