@@ -14,7 +14,12 @@ const AddUserInfo: NextPage = () => {
   const usersUrl = 'http://localhost:3001/users'
 
   // contextで管理している値を取得
-  const { firebaseUser, jsonUsers } = useAuthContext()
+  const { firebaseUser, jsonUsers, setJsonUsers } = useAuthContext()
+
+  // ログインしているfirebaseUserのuidをもとに、jsonUsersの中からログインしているユーザーデータを特定
+  const targetJsonUser = jsonUsers?.find((jsonUser) => {
+    return jsonUser.id === firebaseUser?.uid
+  }) as JsonUserType
 
   const addInfo = (e: EventType) => {
     e.preventDefault()
@@ -32,11 +37,6 @@ const AddUserInfo: NextPage = () => {
     const profileValue = profileInput.value
 
     if (jsonUsers && firebaseUser) {
-      // ログインしているfirebaseUserのuidをもとに、jsonUsersの中からログインしているユーザーデータを特定
-      const targetJsonUser = jsonUsers.find((jsonUser) => {
-        return jsonUser.id === firebaseUser.uid
-      }) as JsonUserType
-
       // そのデータのname,profileプロパティを上書き
       targetJsonUser.name = nameValue
       targetJsonUser.profile = profileValue
@@ -49,8 +49,6 @@ const AddUserInfo: NextPage = () => {
     router.push('/')
   }
 
-  let name = 'test'
-
   return (
     <div>
       <div>
@@ -58,13 +56,7 @@ const AddUserInfo: NextPage = () => {
         <form onSubmit={addInfo}>
           <div>
             <label htmlFor="email">名前</label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              placeholder="name"
-              defaultValue={name}
-            />
+            <input id="name" name="name" type="text" placeholder="name" />
           </div>
           <div>
             <label htmlFor="password">プロフィール</label>

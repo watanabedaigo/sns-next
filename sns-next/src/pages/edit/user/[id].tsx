@@ -15,7 +15,7 @@ const AddUserInfo: NextPage = () => {
   const usersUrl = 'http://localhost:3001/users'
 
   // contextで管理している値を取得
-  const { firebaseUser, jsonUsers } = useAuthContext()
+  const { firebaseUser, jsonUsers, setJsonUsers } = useAuthContext()
 
   // ログインしているfirebaseUserのuidをもとに、jsonUsersの中からログインしているユーザーデータを特定
   const targetJsonUser = jsonUsers?.find((jsonUser) => {
@@ -23,8 +23,8 @@ const AddUserInfo: NextPage = () => {
   }) as JsonUserType
 
   // formの初期表示を格納する変数を定義
-  let nameDefaultValue: string | number = targetJsonUser.name
-  let profileDefaultValue: string | number = targetJsonUser.profile
+  const nameDefaultValue: string | number = targetJsonUser.name
+  const profileDefaultValue: string | number = targetJsonUser.profile
 
   const addInfo = (e: EventType) => {
     e.preventDefault()
@@ -44,11 +44,6 @@ const AddUserInfo: NextPage = () => {
     console.log({ nameValue, profileValue })
 
     if (jsonUsers && firebaseUser) {
-      // ログインしているfirebaseUserのuidをもとに、jsonUsersの中からログインしているユーザーデータを特定
-      const targetJsonUser = jsonUsers.find((jsonUser) => {
-        return jsonUser.id === firebaseUser.uid
-      }) as JsonUserType
-
       // そのデータのname,profileプロパティを上書き
       targetJsonUser.name = nameValue
       targetJsonUser.profile = profileValue
