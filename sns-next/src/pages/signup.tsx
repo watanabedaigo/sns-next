@@ -67,7 +67,6 @@ const SignUp: NextPage = () => {
 
   return (
     <div>
-      <p>SignUp</p>
       <div>
         <h1>ユーザ登録</h1>
         <form onSubmit={signUp}>

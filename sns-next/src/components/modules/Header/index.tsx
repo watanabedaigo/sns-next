@@ -102,6 +102,9 @@ const Header: React.FC = React.memo(() => {
             <li>
               <Link href="/signup">SignUp</Link>
             </li>
+            <li>
+              <Link href="/">Home</Link>
+            </li>
           </ul>
         </div>
       )}

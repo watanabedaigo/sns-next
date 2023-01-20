@@ -33,7 +33,6 @@ const SignIn: NextPage = () => {
 
   return (
     <div>
-      <p>SignIn</p>
       <div>
         <h1>ログイン</h1>
         <form onSubmit={signIn}>
