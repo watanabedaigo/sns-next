@@ -18,8 +18,6 @@ const Header: React.FC = React.memo(() => {
   // contextで管理している値を取得
   const { firebaseUser, jsonUsers, setJsonUsers } = useAuthContext()
 
-  console.log(jsonUsers)
-
   // ログインしているfirebaseUserのuidをもとに、jsonUsersの中からログインしているユーザーデータを特定
   const targetJsonUser = jsonUsers?.find((jsonUser) => {
     return jsonUser.id === firebaseUser?.uid

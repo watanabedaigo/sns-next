@@ -41,8 +41,6 @@ const EditUserInfo: NextPage = () => {
     ) as HTMLInputElement
     const profileValue = profileInput.value
 
-    console.log({ nameValue, profileValue })
-
     if (jsonUsers && firebaseUser) {
       // そのデータのname,profileプロパティを上書き
       targetJsonUser.name = nameValue

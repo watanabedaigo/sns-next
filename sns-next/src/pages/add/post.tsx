@@ -22,7 +22,7 @@ const AddPost: NextPage = () => {
     return jsonUser.id === firebaseUser?.uid
   }) as JsonUserType
 
-  const addInfo = (e: EventType) => {
+  const addPost = (e: EventType) => {
     e.preventDefault()
 
     // 投稿フォームの値を取得
@@ -50,12 +50,12 @@ const AddPost: NextPage = () => {
     <div>
       <div>
         <h1>投稿</h1>
-        <form onSubmit={addInfo}>
+        <form onSubmit={addPost}>
           <div>
             <textarea id="post" name="post" placeholder="post" />
           </div>
           <div>
-            <button>登録</button>
+            <button>投稿</button>
           </div>
         </form>
       </div>

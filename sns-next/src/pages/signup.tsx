@@ -6,7 +6,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { useRouter } from 'next/router'
 import { postData } from 'apis/sns'
 import { useAuthContext } from 'contexts/AuthContext'
-import type { JsonUserType } from 'types/JsonUserType'
+import { JsonUserType } from 'types/JsonUserType'
 
 const SignUp: NextPage = () => {
   // routerオブジェクト作成
