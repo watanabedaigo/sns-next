@@ -90,6 +90,9 @@ const Header: React.FC = React.memo(() => {
             <li>
               <button onClick={deleteUser}>アカウント削除</button>
             </li>
+            <li>
+              <Link href="/add/post">投稿</Link>
+            </li>
           </ul>
         </div>
       ) : (

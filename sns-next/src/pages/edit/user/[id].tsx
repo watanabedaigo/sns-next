@@ -7,7 +7,7 @@ import { putData } from 'apis/sns'
 import { useAuthContext } from 'contexts/AuthContext'
 import type { JsonUserType } from 'types/JsonUserType'
 
-const AddUserInfo: NextPage = () => {
+const EditUserInfo: NextPage = () => {
   // routerオブジェクト作成
   const router = useRouter()
 
@@ -15,7 +15,7 @@ const AddUserInfo: NextPage = () => {
   const usersUrl = 'http://localhost:3001/users'
 
   // contextで管理している値を取得
-  const { firebaseUser, jsonUsers, setJsonUsers } = useAuthContext()
+  const { firebaseUser, jsonUsers } = useAuthContext()
 
   // ログインしているfirebaseUserのuidをもとに、jsonUsersの中からログインしているユーザーデータを特定
   const targetJsonUser = jsonUsers?.find((jsonUser) => {
@@ -90,4 +90,4 @@ const AddUserInfo: NextPage = () => {
   )
 }
 
-export default AddUserInfo
+export default EditUserInfo

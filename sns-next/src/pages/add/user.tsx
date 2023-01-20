@@ -14,7 +14,7 @@ const AddUserInfo: NextPage = () => {
   const usersUrl = 'http://localhost:3001/users'
 
   // contextで管理している値を取得
-  const { firebaseUser, jsonUsers, setJsonUsers } = useAuthContext()
+  const { firebaseUser, jsonUsers } = useAuthContext()
 
   // ログインしているfirebaseUserのuidをもとに、jsonUsersの中からログインしているユーザーデータを特定
   const targetJsonUser = jsonUsers?.find((jsonUser) => {

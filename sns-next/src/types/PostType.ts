@@ -5,4 +5,5 @@ export type PostType = {
   content: string
   addFavoriteUserId: string[]
   userId: string
+  userName: string
 }
