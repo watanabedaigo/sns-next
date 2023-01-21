@@ -2944,6 +2944,11 @@
     "path-parse" "^1.0.7"
     "supports-preserve-symlinks-flag" "^1.0.0"
 
+"ress@^5.0.2":
+  "integrity" "sha512-oHBtOWo/Uc8SzQMbQNIKTcgi8wKmAs7IlNlRywmXudbOtF+c27FlOIq7tnwLDVcTywe6JXYo1pDXHO6kABwNYA=="
+  "resolved" "https://registry.npmjs.org/ress/-/ress-5.0.2.tgz"
+  "version" "5.0.2"
+
 "reusify@^1.0.4":
   "integrity" "sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw=="
   "resolved" "https://registry.npmjs.org/reusify/-/reusify-1.0.4.tgz"
