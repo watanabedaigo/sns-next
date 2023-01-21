@@ -78,18 +78,24 @@ const Header: React.FC = React.memo(() => {
               <p>アカウント名：{targetJsonUser.name}</p>
             </li>
             <li>
-              <button onClick={logout}>ログアウト</button>
+              <Link href="/">Home</Link>
+            </li>
+            <li>
+              <button onClick={logout}>logout</button>
             </li>
             <li>
               <Link href={`/edit/user/${targetJsonUser.name}`}>
-                アカウント修正
+                EditUserInfo
               </Link>
             </li>
             <li>
-              <button onClick={deleteUser}>アカウント削除</button>
+              <button onClick={deleteUser}>deleteUser</button>
             </li>
             <li>
-              <Link href="/add/post">投稿</Link>
+              <Link href="/add/post">Post</Link>
+            </li>
+            <li>
+              <Link href="/users">Users</Link>
             </li>
           </ul>
         </div>
@@ -98,13 +104,16 @@ const Header: React.FC = React.memo(() => {
         <div>
           <ul>
             <li>
+              <Link href="/">Home</Link>
+            </li>
+            <li>
               <Link href="/signin">SignIn</Link>
             </li>
             <li>
               <Link href="/signup">SignUp</Link>
             </li>
             <li>
-              <Link href="/">Home</Link>
+              <Link href="/users">Users</Link>
             </li>
           </ul>
         </div>
