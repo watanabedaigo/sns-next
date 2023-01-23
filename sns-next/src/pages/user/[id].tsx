@@ -1,11 +1,15 @@
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { usePostContext } from 'contexts/PostContext'
+import { useAuthContext } from 'contexts/AuthContext'
+import { deleteData } from 'apis/sns'
+
 import Link from 'next/link'
 
 const User: NextPage = () => {
   // contextで管理している値を取得
-  const { allPosts } = usePostContext()
+  const { allPosts, setAllPosts, showPosts, setShowPosts } = usePostContext()
+  const { firebaseUser } = useAuthContext()
 
   // routerオブジェクト作成
   const router = useRouter()
@@ -17,6 +21,29 @@ const User: NextPage = () => {
   const targetPosts = allPosts?.filter((post) => {
     return post.userName === id
   })
+
+  // APIリクエスト先のURL
+  const postsUrl = 'http://localhost:3001/posts'
+
+  // 投稿削除の関数を定義
+  const deletePost = (deletePostId: string) => {
+    // Delete（Posts）
+    // thenを使うことで、投稿の削除が完了した後に実行する処理を指定する
+    deleteData(postsUrl, deletePostId).then(() => {
+      // State更新
+      // allPostsからidプロパティの値がdeletePostIdではないデータのみ抽出
+      const newAllPosts = allPosts?.filter((post) => {
+        return post.id !== deletePostId
+      })
+      newAllPosts && setAllPosts([...newAllPosts])
+
+      // showPostsからidプロパティの値がdeletePostIdではないデータのみ抽出
+      const newShowPosts = showPosts?.filter((post) => {
+        return post.id !== deletePostId
+      })
+      newShowPosts && setShowPosts([...newShowPosts])
+    })
+  }
 
   return (
     <div>
@@ -30,6 +57,15 @@ const User: NextPage = () => {
                   <p>{post.userName}</p>
                   <p>{post.content}</p>
                 </Link>
+                {post.userId === firebaseUser?.uid && (
+                  <button
+                    onClick={() => {
+                      deletePost(post.id)
+                    }}
+                  >
+                    delete
+                  </button>
+                )}
               </li>
             )
           })}
