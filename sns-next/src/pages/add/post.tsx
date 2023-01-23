@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { postData } from 'apis/sns'
 import { useAuthContext } from 'contexts/AuthContext'
+import { usePostContext } from 'contexts/PostContext'
 import type { JsonUserType } from 'types/JsonUserType'
 import { ulid } from 'ulid'
 
@@ -15,6 +16,7 @@ const AddPost: NextPage = () => {
   const postsUrl = 'http://localhost:3001/posts'
 
   // contextで管理している値を取得
+  const { allPosts, setAllPosts, showPosts, setShowPosts } = usePostContext()
   const { firebaseUser, jsonUsers } = useAuthContext()
 
   // ログインしているfirebaseUserのuidをもとに、jsonUsersの中からログインしているユーザーデータを特定
@@ -40,10 +42,17 @@ const AddPost: NextPage = () => {
     }
 
     // Create（Users）
+    // thenを使うことで、投稿の削除が完了した後に実行する処理を指定する
     postData(postsUrl, newPost)
-
-    // /にリダイレクト
-    router.push('/')
+      .then(() => {
+        // State更新
+        allPosts && setAllPosts([...allPosts, newPost])
+        showPosts && setShowPosts([...showPosts, newPost])
+      })
+      .then(() => {
+        // /にリダイレクト
+        router.push('/')
+      })
   }
 
   return (

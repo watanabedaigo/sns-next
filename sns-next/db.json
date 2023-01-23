@@ -16,7 +16,9 @@
       "name": "bbb_name",
       "profile": "bbb_profile",
       "favoritePostId": [],
-      "followUserId": ["iIyTVRuHqCbFL9kuoLcmW2XOi8T2"],
+      "followUserId": [
+        "iIyTVRuHqCbFL9kuoLcmW2XOi8T2"
+      ],
       "follwedUserId": []
     },
     {
@@ -29,13 +31,6 @@
     }
   ],
   "posts": [
-    {
-      "id": "01GQ744C9N85RDKNRNQJ5ZMTDF",
-      "content": "aaa_post",
-      "addFavoriteUserId": [],
-      "userId": "uiEG0MdVfOgZQ9BaVPEkaOPhlqh1",
-      "userName": "aaa_name_edit"
-    },
     {
       "id": "01GQ7B5AQ8ERV44N71J0H56QT6",
       "content": "bbb_post",
