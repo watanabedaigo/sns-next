@@ -44,19 +44,19 @@ const Home: NextPage = () => {
   }
 
   // 投稿をお気に入りに追加する関数を定義
-  const addFavorite = (addFavoritePostId: string) => {
+  const toggleFavorite = (targetPostId: string) => {
     // json-serverのユーザーのfavoritePostIdプロパティ（配列）に投稿のidを追加
     // ユーザーのfavoritePostIdプロパティを上書き
     // 条件分岐
-    if (targetJsonUser.favoritePostId.indexOf(addFavoritePostId) !== -1) {
+    if (targetJsonUser.favoritePostId.indexOf(targetPostId) !== -1) {
       // 既に含んでいる場合は取り除く
       const newData = targetJsonUser.favoritePostId.filter((postId) => {
-        return postId !== addFavoritePostId
+        return postId !== targetPostId
       })
       targetJsonUser.favoritePostId = [...newData]
     } else {
       // 含んでいない場合は追加）d
-      targetJsonUser.favoritePostId.push(addFavoritePostId)
+      targetJsonUser.favoritePostId.push(targetPostId)
     }
 
     // Update（Users）
@@ -83,7 +83,7 @@ const Home: NextPage = () => {
               </Link>
               <button
                 onClick={() => {
-                  addFavorite(post.id)
+                  toggleFavorite(post.id)
                 }}
               >
                 {targetJsonUser.favoritePostId.indexOf(post.id) !== -1

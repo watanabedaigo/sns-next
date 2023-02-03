@@ -4,7 +4,9 @@
       "id": "uiEG0MdVfOgZQ9BaVPEkaOPhlqh1",
       "name": "aaa_name_edit",
       "profile": "aaa_profile_edit",
-      "favoritePostId": [],
+      "favoritePostId": [
+        "01GR8ZHMKC26SYM0E1SX5WR5WQ"
+      ],
       "followUserId": [
         "sSWKf22XHKaE4PjrDcT8USeLAVf2",
         "iIyTVRuHqCbFL9kuoLcmW2XOi8T2"
@@ -34,7 +36,9 @@
       "name": "eee_name",
       "profile": "eee_profile",
       "favoritePostId": [],
-      "followUserId": [],
+      "followUserId": [
+        "sSWKf22XHKaE4PjrDcT8USeLAVf2"
+      ],
       "follwedUserId": []
     }
   ],
