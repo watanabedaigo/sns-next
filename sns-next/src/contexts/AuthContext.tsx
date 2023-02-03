@@ -35,15 +35,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   // State
   // 「ログインしている」firebase側のユーザーを扱う
   const [firebaseUser, setFirebaseUser] = useState<FirebaseUserType>(null)
-  // 「全ての」json-server側の全ユーザーを扱う
+  // 「全ての」json-server側のユーザーを扱う
   const [jsonUsers, setJsonUsers] = useState<JsonUserType[]>([])
+  // 「ログインしている」json-server側のユーザーを扱う
+  const [jsonUser, setJsonUser] = useState<JsonUserType>()
   // リロード対策用のフラッグ
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState<boolean>(true)
 
   // contextで管理する値を定義
   const value = {
     firebaseUser,
     jsonUsers,
+    jsonUser,
     setJsonUsers,
   }
 
@@ -71,9 +74,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     // firebaseで用意されている、ログイン情報が変わると発火するonAuthStateChanged
     const authStateChanged = onAuthStateChanged(auth, async (user) => {
+      // ログインしているfirebaseUserのuidをもとに、jsonUsersの中からログインしているユーザーデータを特定
+      // const targetJsonUser = jsonUsers.find((jsonUser) => {
+      //   return jsonUser.id === firebaseUser?.uid
+      // }) as JsonUserType
+
       // State更新
       setFirebaseUser(user)
       setLoading(false)
+      // setJsonUser(targetJsonUser)
     })
 
     return () => {

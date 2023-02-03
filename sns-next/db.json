@@ -28,12 +28,34 @@
       "favoritePostId": [],
       "followUserId": [],
       "follwedUserId": []
+    },
+    {
+      "id": "wS5FX2eLviRqocSIkR8oo9tJLi63",
+      "name": "eee_name",
+      "profile": "eee_profile",
+      "favoritePostId": [],
+      "followUserId": [],
+      "follwedUserId": []
     }
   ],
   "posts": [
     {
       "id": "01GQ7CNE9NMS1A13XRFSCAHGPD",
       "content": "ccc_post",
+      "addFavoriteUserId": [],
+      "userId": "iIyTVRuHqCbFL9kuoLcmW2XOi8T2",
+      "userName": "ccc_name"
+    },
+    {
+      "id": "01GQHT0J4HRHXWVJP6P98YC2VN",
+      "content": "bbb_post",
+      "addFavoriteUserId": [],
+      "userId": "sSWKf22XHKaE4PjrDcT8USeLAVf2",
+      "userName": "bbb_name"
+    },
+    {
+      "id": "01GR8ZHMKC26SYM0E1SX5WR5WQ",
+      "content": "ccc_post2",
       "addFavoriteUserId": [],
       "userId": "iIyTVRuHqCbFL9kuoLcmW2XOi8T2",
       "userName": "ccc_name"
