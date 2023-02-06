@@ -69,7 +69,7 @@ const Users: NextPage = () => {
         {jsonUsers?.map((user) => {
           return (
             <li key={user.id}>
-              <Link href={`/user/${user.name}`}>{user.name}</Link>
+              <Link href={`/user/${user.id}`}>{user.name}</Link>
               {targetJsonUser?.id !== user.id && (
                 <button
                   onClick={() => {
