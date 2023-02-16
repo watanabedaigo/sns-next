@@ -86,7 +86,7 @@ const Home: NextPage = () => {
                   toggleFavorite(post.id)
                 }}
               >
-                {targetJsonUser.favoritePostId.indexOf(post.id) !== -1
+                {targetJsonUser?.favoritePostId.indexOf(post.id) !== -1
                   ? 'remove'
                   : 'add'}
               </button>

@@ -34,6 +34,14 @@ const User: NextPage = () => {
     return user.id === id
   })
 
+  // 表示するユーザーのfavoriteから、表示する投稿のidを抽出
+  const favoritePostIds = targetUser?.favoritePostId
+  const favoritePosts = favoritePostIds?.map((favoritePostId) => {
+    return allPosts?.find((post) => {
+      return post.id === favoritePostId
+    })
+  })
+
   // APIリクエスト先のURL
   const usersUrl = 'http://localhost:3001/users'
   const postsUrl = 'http://localhost:3001/posts'
@@ -102,8 +110,6 @@ const User: NextPage = () => {
     setShowPosts([...MyPosts, ...followsPosts])
   }
 
-  console.log(id)
-
   return (
     <div>
       <div>
@@ -122,26 +128,52 @@ const User: NextPage = () => {
           )}
         </div>
         <ul>
-          {targetPosts?.map((post) => {
-            return (
-              <li key={post.id}>
-                <Link href={`/user/${post.userName}`}>
-                  <p>{post.userName}</p>
-                  <p>{post.content}</p>
-                </Link>
-                {post.userId === firebaseUser?.uid && (
-                  <button
-                    onClick={() => {
-                      deletePost(post.id)
-                    }}
-                  >
-                    delete
-                  </button>
-                )}
-              </li>
-            )
-          })}
+          <li>
+            <button>mypost</button>
+          </li>
+          <li>
+            <button>favorites</button>
+          </li>
+          <li>
+            <button>follows</button>
+          </li>
         </ul>
+        <div>
+          <h2>mypost</h2>
+          <ul>
+            {targetPosts?.map((post) => {
+              return (
+                <li key={post.id}>
+                  <Link href={`/user/${post.userName}`}>
+                    <p>{post.userName}</p>
+                    <p>{post.content}</p>
+                  </Link>
+                  {post.userId === firebaseUser?.uid && (
+                    <button
+                      onClick={() => {
+                        deletePost(post.id)
+                      }}
+                    >
+                      delete
+                    </button>
+                  )}
+                </li>
+              )
+            })}
+          </ul>
+        </div>
+        <div>
+          <h2>favorites</h2>
+          <ul>
+            {favoritePosts?.map((post) => {
+              return <li key={post.id}>{post.content}</li>
+            })}
+          </ul>
+        </div>
+        <div>
+          <h2>follows</h2>
+          <ul></ul>
+        </div>
       </div>
     </div>
   )

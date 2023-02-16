@@ -4,9 +4,7 @@
       "id": "uiEG0MdVfOgZQ9BaVPEkaOPhlqh1",
       "name": "aaa_name_edit",
       "profile": "aaa_profile_edit",
-      "favoritePostId": [
-        "01GR8ZHMKC26SYM0E1SX5WR5WQ"
-      ],
+      "favoritePostId": ["01GR8ZHMKC26SYM0E1SX5WR5WQ"],
       "followUserId": [
         "sSWKf22XHKaE4PjrDcT8USeLAVf2",
         "iIyTVRuHqCbFL9kuoLcmW2XOi8T2"
@@ -18,27 +16,20 @@
       "name": "bbb_name",
       "profile": "bbb_profile",
       "favoritePostId": [],
-      "followUserId": [
-        "iIyTVRuHqCbFL9kuoLcmW2XOi8T2"
-      ],
+      "followUserId": ["iIyTVRuHqCbFL9kuoLcmW2XOi8T2"],
       "follwedUserId": []
     },
     {
       "id": "iIyTVRuHqCbFL9kuoLcmW2XOi8T2",
       "name": "ccc_name",
       "profile": "ccc_profile",
-      "favoritePostId": [],
-      "followUserId": [],
-      "follwedUserId": []
-    },
-    {
-      "id": "wS5FX2eLviRqocSIkR8oo9tJLi63",
-      "name": "eee_name",
-      "profile": "eee_profile",
-      "favoritePostId": [],
+      "favoritePostId": [
+        "01GQHT0J4HRHXWVJP6P98YC2VN",
+        "01GS7YCF4GEC2KVGPVC2TJG8WA",
+        "01GS7YCR3X37WZ52MJVCA4JZJB"
+      ],
       "followUserId": [
         "sSWKf22XHKaE4PjrDcT8USeLAVf2",
-        "iIyTVRuHqCbFL9kuoLcmW2XOi8T2",
         "uiEG0MdVfOgZQ9BaVPEkaOPhlqh1"
       ],
       "follwedUserId": []
@@ -60,11 +51,18 @@
       "userName": "bbb_name"
     },
     {
-      "id": "01GR8ZHMKC26SYM0E1SX5WR5WQ",
-      "content": "ccc_post2",
+      "id": "01GS7YCF4GEC2KVGPVC2TJG8WA",
+      "content": "aaa_post",
       "addFavoriteUserId": [],
-      "userId": "iIyTVRuHqCbFL9kuoLcmW2XOi8T2",
-      "userName": "ccc_name"
+      "userId": "uiEG0MdVfOgZQ9BaVPEkaOPhlqh1",
+      "userName": "aaa_name_edit"
+    },
+    {
+      "id": "01GS7YCR3X37WZ52MJVCA4JZJB",
+      "content": "aaa_post02",
+      "addFavoriteUserId": [],
+      "userId": "uiEG0MdVfOgZQ9BaVPEkaOPhlqh1",
+      "userName": "aaa_name_edit"
     }
   ]
 }
