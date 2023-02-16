@@ -81,23 +81,27 @@ const Home: NextPage = () => {
                 <p>{post.userName}</p>
                 <p>{post.content}</p>
               </Link>
-              <button
-                onClick={() => {
-                  toggleFavorite(post.id)
-                }}
-              >
-                {targetJsonUser?.favoritePostId.indexOf(post.id) !== -1
-                  ? 'remove'
-                  : 'add'}
-              </button>
-              {post.userId === firebaseUser?.uid && (
-                <button
-                  onClick={() => {
-                    deletePost(post.id)
-                  }}
-                >
-                  delete
-                </button>
+              {firebaseUser && (
+                <div>
+                  <button
+                    onClick={() => {
+                      toggleFavorite(post.id)
+                    }}
+                  >
+                    {targetJsonUser?.favoritePostId.indexOf(post.id) !== -1
+                      ? 'remove'
+                      : 'add'}
+                  </button>
+                  {post.userId === firebaseUser?.uid && (
+                    <button
+                      onClick={() => {
+                        deletePost(post.id)
+                      }}
+                    >
+                      delete
+                    </button>
+                  )}
+                </div>
               )}
             </li>
           )

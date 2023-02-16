@@ -4,7 +4,7 @@
       "id": "uiEG0MdVfOgZQ9BaVPEkaOPhlqh1",
       "name": "aaa_name_edit",
       "profile": "aaa_profile_edit",
-      "favoritePostId": ["01GR8ZHMKC26SYM0E1SX5WR5WQ"],
+      "favoritePostId": [],
       "followUserId": [
         "sSWKf22XHKaE4PjrDcT8USeLAVf2",
         "iIyTVRuHqCbFL9kuoLcmW2XOi8T2"
@@ -26,11 +26,12 @@
       "favoritePostId": [
         "01GQHT0J4HRHXWVJP6P98YC2VN",
         "01GS7YCF4GEC2KVGPVC2TJG8WA",
-        "01GS7YCR3X37WZ52MJVCA4JZJB"
+        "01GS7YCR3X37WZ52MJVCA4JZJB",
+        "01GQ7CNE9NMS1A13XRFSCAHGPD"
       ],
       "followUserId": [
-        "sSWKf22XHKaE4PjrDcT8USeLAVf2",
-        "uiEG0MdVfOgZQ9BaVPEkaOPhlqh1"
+        "uiEG0MdVfOgZQ9BaVPEkaOPhlqh1",
+        "sSWKf22XHKaE4PjrDcT8USeLAVf2"
       ],
       "follwedUserId": []
     }

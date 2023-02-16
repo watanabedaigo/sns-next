@@ -70,7 +70,7 @@ const Users: NextPage = () => {
           return (
             <li key={user.id}>
               <Link href={`/user/${user.id}`}>{user.name}</Link>
-              {targetJsonUser?.id !== user.id && (
+              {firebaseUser && targetJsonUser?.id !== user.id && (
                 <button
                   onClick={() => {
                     toggleFollow(user.id)

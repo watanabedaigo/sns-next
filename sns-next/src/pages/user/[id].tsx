@@ -34,11 +34,19 @@ const User: NextPage = () => {
     return user.id === id
   })
 
-  // 表示するユーザーのfavoriteから、表示する投稿のidを抽出
+  // 表示するユーザーのfavoriteから、表示する投稿を抽出
   const favoritePostIds = targetUser?.favoritePostId
   const favoritePosts = favoritePostIds?.map((favoritePostId) => {
     return allPosts?.find((post) => {
       return post.id === favoritePostId
+    })
+  })
+
+  // 表示するユーザーのfollowUserIdから、表示するユーザを抽出
+  const followUserIds = targetUser?.followUserId
+  const followUsers = followUserIds?.map((followUserId) => {
+    return jsonUsers?.find((user) => {
+      return user.id === followUserId
     })
   })
 
@@ -110,6 +118,34 @@ const User: NextPage = () => {
     setShowPosts([...MyPosts, ...followsPosts])
   }
 
+  // 投稿をお気に入りに追加する関数を定義
+  const toggleFavorite = (targetPostId: string) => {
+    // json-serverのユーザーのfavoritePostIdプロパティ（配列）に投稿のidを追加
+    // ユーザーのfavoritePostIdプロパティを上書き
+    // 条件分岐
+    if (targetJsonUser.favoritePostId.indexOf(targetPostId) !== -1) {
+      // 既に含んでいる場合は取り除く
+      const newData = targetJsonUser.favoritePostId.filter((postId) => {
+        return postId !== targetPostId
+      })
+      targetJsonUser.favoritePostId = [...newData]
+    } else {
+      // 含んでいない場合は追加）d
+      targetJsonUser.favoritePostId.push(targetPostId)
+    }
+
+    // Update（Users）
+    putData(usersUrl, targetJsonUser.id, targetJsonUser)
+
+    // State更新
+    // 変更対象（ログインしているユーザー）以外のデータを抽出
+    const newUsers = jsonUsers?.filter((user) => {
+      return user.id !== targetJsonUser.id
+    }) as JsonUserType[]
+
+    setJsonUsers([...newUsers, targetJsonUser])
+  }
+
   return (
     <div>
       <div>
@@ -166,13 +202,58 @@ const User: NextPage = () => {
           <h2>favorites</h2>
           <ul>
             {favoritePosts?.map((post) => {
-              return <li key={post.id}>{post.content}</li>
+              return (
+                <li key={post?.id}>
+                  {post?.content}
+                  <button
+                    onClick={() => {
+                      toggleFavorite(post?.id as string)
+                    }}
+                  >
+                    {targetJsonUser?.favoritePostId.indexOf(
+                      post?.id as string
+                    ) !== -1
+                      ? 'remove'
+                      : 'add'}
+                  </button>
+                  {post?.userId === firebaseUser?.uid && (
+                    <button
+                      onClick={() => {
+                        deletePost(post?.id as string)
+                      }}
+                    >
+                      delete
+                    </button>
+                  )}
+                </li>
+              )
             })}
           </ul>
         </div>
         <div>
           <h2>follows</h2>
-          <ul></ul>
+          <ul>
+            {followUsers?.map((user) => {
+              return (
+                <li key={user?.id}>
+                  <Link href={`/user/${user?.id}`}>{user?.name}</Link>
+                  {targetJsonUser?.id !== user?.id && (
+                    <button
+                      onClick={() => {
+                        toggleFollow(user?.id as string)
+                      }}
+                    >
+                      {targetJsonUser?.followUserId.indexOf(
+                        user?.id as string
+                      ) !== -1
+                        ? 'remove'
+                        : 'add'}
+                    </button>
+                  )}
+                </li>
+              )
+            })}
+          </ul>
         </div>
       </div>
     </div>
