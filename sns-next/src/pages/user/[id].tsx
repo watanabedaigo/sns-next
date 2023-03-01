@@ -146,6 +146,35 @@ const User: NextPage = () => {
     setJsonUsers([...newUsers, targetJsonUser])
   }
 
+  // タブを切り替える関数を定義
+  const changeTab = (e: React.MouseEvent<HTMLInputElement>) => {
+    // クリックされたボタンのidと、現在aria-selected属性がtrueになっているボタンのidを取得
+    const targetButtonId = e.currentTarget.getAttribute('id')
+    const activeButton = document.querySelector('[aria-selected = "true"]')
+    const activeButtonId = activeButton?.getAttribute('id')
+
+    // 2つのidが異なる時のみ、ボタンのaria-selected属性、タブのaria-hidden属性の切り替え処理を行う
+    if (targetButtonId !== activeButtonId) {
+      // ボタン
+      // 現在aria-selected属性がtrueになっているものをfalseに変える
+      activeButton?.setAttribute('aria-selected', 'false')
+
+      // クリックされたボタンのaria-selected属性の値をtrueにする
+      e.currentTarget.setAttribute('aria-selected', 'true')
+
+      // タブ
+      // 現在aria-hidden属性がfalseになっているタブを取得し、trueに変える
+      const activeTab = document.querySelector('[aria-hidden = "false"]')
+      activeTab?.setAttribute('aria-hidden', 'true')
+
+      // クリックされたボタンのid属性から対応するタブのコンテンツを取得し、aria-hidden属性をfalseにする
+      const tabName = targetButtonId?.slice(4)
+      const tabContentId = `content-${tabName}`
+      const tabContent = document.getElementById(tabContentId)
+      tabContent?.setAttribute('aria-hidden', 'false')
+    }
+  }
+
   return (
     <div>
       <div>
@@ -165,95 +194,142 @@ const User: NextPage = () => {
         </div>
         <ul>
           <li>
-            <button>mypost</button>
+            <button
+              role="tab"
+              aria-selected="true"
+              aria-controls="content-mypost"
+              id="tab-mypost"
+              onClick={changeTab}
+              className="btn--tab"
+            >
+              mypost
+            </button>
           </li>
           <li>
-            <button>favorites</button>
+            <button
+              role="tab"
+              aria-selected="false"
+              aria-controls="content-favorites"
+              id="tab-favorites"
+              onClick={changeTab}
+              className="btn--tab"
+            >
+              favorites
+            </button>
           </li>
           <li>
-            <button>follows</button>
+            <button
+              role="tab"
+              aria-selected="false"
+              aria-controls="content-follows"
+              id="tab-follows"
+              onClick={changeTab}
+              className="btn--tab"
+            >
+              follows
+            </button>
           </li>
         </ul>
         <div>
-          <h2>mypost</h2>
-          <ul>
-            {targetPosts?.map((post) => {
-              return (
-                <li key={post.id}>
-                  <Link href={`/user/${post.userName}`}>
-                    <p>{post.userName}</p>
-                    <p>{post.content}</p>
-                  </Link>
-                  {post.userId === firebaseUser?.uid && (
+          <div
+            id="content-mypost"
+            role="tabpanel"
+            aria-labelledby="tab-mypost"
+            aria-hidden="false"
+            className="tab"
+          >
+            <h2>mypost</h2>
+            <ul>
+              {targetPosts?.map((post) => {
+                return (
+                  <li key={post.id}>
+                    <Link href={`/user/${post.userName}`}>
+                      <p>{post.userName}</p>
+                      <p>{post.content}</p>
+                    </Link>
+                    {post.userId === firebaseUser?.uid && (
+                      <button
+                        onClick={() => {
+                          deletePost(post.id)
+                        }}
+                      >
+                        delete
+                      </button>
+                    )}
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+          <div
+            id="content-favorites"
+            role="tabpanel"
+            aria-labelledby="tab-favorites"
+            aria-hidden="true"
+            className="tab"
+          >
+            <h2>favorites</h2>
+            <ul>
+              {favoritePosts?.map((post) => {
+                return (
+                  <li key={post?.content}>
+                    {post?.content}
                     <button
                       onClick={() => {
-                        deletePost(post.id)
+                        toggleFavorite(post?.id as string)
                       }}
                     >
-                      delete
-                    </button>
-                  )}
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-        <div>
-          <h2>favorites</h2>
-          <ul>
-            {favoritePosts?.map((post) => {
-              return (
-                <li key={post?.id}>
-                  {post?.content}
-                  <button
-                    onClick={() => {
-                      toggleFavorite(post?.id as string)
-                    }}
-                  >
-                    {targetJsonUser?.favoritePostId.indexOf(
-                      post?.id as string
-                    ) !== -1
-                      ? 'remove'
-                      : 'add'}
-                  </button>
-                  {post?.userId === firebaseUser?.uid && (
-                    <button
-                      onClick={() => {
-                        deletePost(post?.id as string)
-                      }}
-                    >
-                      delete
-                    </button>
-                  )}
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-        <div>
-          <h2>follows</h2>
-          <ul>
-            {followUsers?.map((user) => {
-              return (
-                <li key={user?.id}>
-                  <Link href={`/user/${user?.id}`}>{user?.name}</Link>
-                  {targetJsonUser?.id !== user?.id && (
-                    <button
-                      onClick={() => {
-                        toggleFollow(user?.id as string)
-                      }}
-                    >
-                      {targetJsonUser?.followUserId.indexOf(
-                        user?.id as string
+                      {targetJsonUser?.favoritePostId.indexOf(
+                        post?.id as string
                       ) !== -1
                         ? 'remove'
                         : 'add'}
                     </button>
-                  )}
-                </li>
-              )
-            })}
-          </ul>
+                    {post?.userId === firebaseUser?.uid && (
+                      <button
+                        onClick={() => {
+                          deletePost(post?.id as string)
+                        }}
+                      >
+                        delete
+                      </button>
+                    )}
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+          <div
+            id="content-follows"
+            role="tabpanel"
+            aria-labelledby="tab-follows"
+            aria-hidden="true"
+            className="tab"
+          >
+            <h2>follows</h2>
+            <ul>
+              {followUsers?.map((user) => {
+                return (
+                  <li key={user?.id}>
+                    <Link href={`/user/${user?.id}`}>{user?.name}</Link>
+                    {targetJsonUser?.id !== user?.id && (
+                      <button
+                        onClick={() => {
+                          toggleFollow(user?.id as string)
+                        }}
+                      >
+                        {targetJsonUser?.followUserId.indexOf(
+                          user?.id as string
+                        ) !== -1
+                          ? 'remove'
+                          : 'add'}
+                      </button>
+                    )}
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
         </div>
       </div>
     </div>
