@@ -5,6 +5,7 @@ import { useAuthContext } from 'contexts/AuthContext'
 import { putData, deleteData } from 'apis/sns'
 import { PostType } from 'types/PostType'
 import type { JsonUserType } from 'types/JsonUserType'
+import type { EventType } from 'types/EventType'
 
 import Link from 'next/link'
 
@@ -147,7 +148,7 @@ const User: NextPage = () => {
   }
 
   // タブを切り替える関数を定義
-  const changeTab = (e: React.MouseEvent<HTMLInputElement>) => {
+  const changeTab = (e: EventType) => {
     // クリックされたボタンのidと、現在aria-selected属性がtrueになっているボタンのidを取得
     const targetButtonId = e.currentTarget.getAttribute('id')
     const activeButton = document.querySelector('[aria-selected = "true"]')
