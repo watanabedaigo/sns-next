@@ -78,20 +78,26 @@ export const PostProvider: React.FC<PostProviderProps> = ({ children }) => {
             // ログインしている時：表示する投稿＝自分の投稿とフォローしているユーザーの投稿（post ≠ showPosts）
             // 自分の投稿を抽出
             const MyPosts = getPosts.filter((post) => {
-              return post.userId === firebaseUser.uid
+              return post.userId === firebaseUser.uid && post.replyId === ''
             }) as PostType[]
 
             // フォローしているユーザーの投稿を抽出
             // json-serverにおける、ログインしているユーザーデータのfollowUserIdプロパティ（配列）にidが含まれているユーザーの投稿を表示
             // = followUserId（配列）中に、post.idが入っていれば表示
             const followsPosts = getPosts.filter((post) => {
-              return targetJsonUser.followUserId.indexOf(post.userId) !== -1
+              return (
+                targetJsonUser.followUserId.indexOf(post.userId) !== -1 &&
+                post.replyId === ''
+              )
             }) as PostType[]
 
             setShowPosts([...MyPosts, ...followsPosts])
           } else {
-            // ログインしていない時：表示する投稿＝全投稿（post = showPosts）
-            setShowPosts([...getPosts])
+            // ログインしていない時：表示する投稿＝リプライを覗く全投稿
+            const notReplyPosts = getPosts.filter((post) => {
+              return post.replyId === ''
+            })
+            setShowPosts([...notReplyPosts])
           }
         }
       })

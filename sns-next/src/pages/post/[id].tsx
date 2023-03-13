@@ -1,20 +1,32 @@
 import type { NextPage } from 'next'
+import { useRouter } from 'next/router'
 import { usePostContext } from 'contexts/PostContext'
 import { useAuthContext } from 'contexts/AuthContext'
-import Link from 'next/link'
-import { putData, deleteData } from 'apis/sns'
-import { useRouter } from 'next/router'
+import { postData } from 'apis/sns'
+import { PostType } from 'types/PostType'
+import type { EventType } from 'types/EventType'
 import type { JsonUserType } from 'types/JsonUserType'
+import { putData, deleteData } from 'apis/sns'
+import Link from 'next/link'
 
-const Home: NextPage = () => {
+import { ulid } from 'ulid'
+
+const Post: NextPage = () => {
+  // パスから投稿のidを取得し、jsonデータから該当する投稿を抽出する
   // routerオブジェクト作成
   const router = useRouter()
+
+  // パスパラメータから表示する投稿のidを取得
+  const { id } = router.query
 
   // contextで管理している値を取得
   const { allPosts, setAllPosts, showPosts, setShowPosts } = usePostContext()
   const { firebaseUser, jsonUsers, setJsonUsers } = useAuthContext()
 
-  console.log(showPosts)
+  // 該当する投稿を抽出
+  const targetPost = allPosts?.find((post) => {
+    return post.id === id
+  }) as PostType
 
   // ログインしているfirebaseUserのuidをもとに、jsonUsersの中からログインしているユーザーデータを特定
   const targetJsonUser = jsonUsers?.find((jsonUser) => {
@@ -24,6 +36,39 @@ const Home: NextPage = () => {
   // APIリクエスト先のURL
   const postsUrl = 'http://localhost:3001/posts'
   const usersUrl = 'http://localhost:3001/users'
+
+  // 投稿する関数を定義
+  const addPost = (e: EventType) => {
+    e.preventDefault()
+
+    // 投稿フォームの値を取得
+    const postInput = e.currentTarget.querySelector(
+      'textarea'
+    ) as HTMLTextAreaElement
+    const postValue = postInput.value
+
+    // jsonに追加するデータを作成
+    const newPost = {
+      id: ulid(),
+      content: postValue,
+      addFavoriteUserId: [],
+      userId: targetJsonUser.id,
+      userName: targetJsonUser.name,
+      replyId: id as string,
+    }
+
+    // Create（Posts）
+    // thenを使うことで、投稿の追加が完了した後に実行する処理を指定する
+    postData(postsUrl, newPost).then(() => {
+      // State更新
+      allPosts && setAllPosts([...allPosts, newPost])
+    })
+  }
+
+  // 表示している投稿へのリプライのみ抽出
+  const replyPosts = allPosts?.filter((post) => {
+    return post.replyId.indexOf(id as string) !== -1
+  })
 
   // 投稿削除の関数を定義
   const deletePost = (deletePostId: string) => {
@@ -75,8 +120,21 @@ const Home: NextPage = () => {
 
   return (
     <div>
+      <p>{targetPost?.content}</p>
+      <div>
+        <p>reply</p>
+        <form onSubmit={addPost}>
+          <div>
+            <textarea id="post" name="post" placeholder="post" />
+          </div>
+          <div>
+            <button>返信</button>
+          </div>
+        </form>
+      </div>
       <ul>
-        {showPosts?.map((post) => {
+        {replyPosts?.map((post) => {
+          // todo 投稿内容を他に合わせる
           return (
             <li key={post.id}>
               <Link href={`/user/${post.userName}`}>
@@ -87,7 +145,6 @@ const Home: NextPage = () => {
               </Link>
               {firebaseUser && (
                 <div>
-                  <Link href={`/post/${post.id}`}>reply</Link>
                   <button
                     onClick={() => {
                       toggleFavorite(post.id)
@@ -116,4 +173,4 @@ const Home: NextPage = () => {
   )
 }
 
-export default Home
+export default Post

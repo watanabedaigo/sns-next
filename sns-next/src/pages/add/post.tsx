@@ -33,16 +33,18 @@ const AddPost: NextPage = () => {
     ) as HTMLTextAreaElement
     const postValue = postInput.value
 
+    // jsonに追加するデータを作成
     const newPost = {
       id: ulid(),
       content: postValue,
       addFavoriteUserId: [],
       userId: targetJsonUser.id,
       userName: targetJsonUser.name,
+      replyId: '',
     }
 
-    // Create（Users）
-    // thenを使うことで、投稿の削除が完了した後に実行する処理を指定する
+    // Create（Posts）
+    // thenを使うことで、投稿の追加が完了した後に実行する処理を指定する
     postData(postsUrl, newPost)
       .then(() => {
         // State更新

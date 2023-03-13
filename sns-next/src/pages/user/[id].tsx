@@ -245,6 +245,8 @@ const User: NextPage = () => {
                   <li key={post.id}>
                     <Link href={`/user/${post.userName}`}>
                       <p>{post.userName}</p>
+                    </Link>
+                    <Link href={`/post/${post.id}`}>
                       <p>{post.content}</p>
                     </Link>
                     {post.userId === firebaseUser?.uid && (

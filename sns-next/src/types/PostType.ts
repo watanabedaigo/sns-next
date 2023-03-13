@@ -6,4 +6,5 @@ export type PostType = {
   addFavoriteUserId: string[]
   userId: string
   userName: string
+  replyId: string
 }
