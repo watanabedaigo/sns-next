@@ -1,35 +1,9 @@
 import type { NextPage } from 'next'
-import type { EventType } from 'types/EventType'
-import Link from 'next/link'
-import { auth } from 'auth/firebase'
-import { signInWithEmailAndPassword } from 'firebase/auth'
-import { useRouter } from 'next/router'
+import { useSns } from 'hooks/useSns'
 
 const SignIn: NextPage = () => {
-  // routerオブジェクト作成
-  const router = useRouter()
-
-  const signIn = async (e: EventType) => {
-    e.preventDefault()
-
-    // メールフォームの値を取得
-    const emailInput = e.currentTarget.querySelector(
-      'input[name="email"]'
-    ) as HTMLInputElement
-    const emailValue = emailInput.value
-
-    // パスワードフォームの値を取得
-    const passwordInput = e.currentTarget.querySelector(
-      'input[name="password"]'
-    ) as HTMLInputElement
-    const passwordValue = passwordInput.value
-
-    // firebaseで用意されている、ログインの関数
-    await signInWithEmailAndPassword(auth, emailValue, passwordValue)
-
-    // /にリダイレクト
-    router.push('/')
-  }
+  // useSnsで管理しているロジックを取得
+  const { signIn } = useSns()
 
   return (
     <div>

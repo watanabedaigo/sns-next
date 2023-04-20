@@ -1,61 +1,9 @@
 import type { NextPage } from 'next'
-import type { EventType } from 'types/EventType'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { postData } from 'apis/sns'
-import { useAuthContext } from 'contexts/AuthContext'
-import { usePostContext } from 'contexts/PostContext'
-import type { JsonUserType } from 'types/JsonUserType'
-import { ulid } from 'ulid'
+import { useSns } from 'hooks/useSns'
 
 const AddPost: NextPage = () => {
-  // routerオブジェクト作成
-  const router = useRouter()
-
-  // APIリクエスト先のURL
-  const postsUrl = 'http://localhost:3001/posts'
-
-  // contextで管理している値を取得
-  const { allPosts, setAllPosts, showPosts, setShowPosts } = usePostContext()
-  const { firebaseUser, jsonUsers } = useAuthContext()
-
-  // ログインしているfirebaseUserのuidをもとに、jsonUsersの中からログインしているユーザーデータを特定
-  const targetJsonUser = jsonUsers?.find((jsonUser) => {
-    return jsonUser.id === firebaseUser?.uid
-  }) as JsonUserType
-
-  const addPost = (e: EventType) => {
-    e.preventDefault()
-
-    // 投稿フォームの値を取得
-    const postInput = e.currentTarget.querySelector(
-      'textarea'
-    ) as HTMLTextAreaElement
-    const postValue = postInput.value
-
-    // jsonに追加するデータを作成
-    const newPost = {
-      id: ulid(),
-      content: postValue,
-      addFavoriteUserId: [],
-      userId: targetJsonUser.id,
-      userName: targetJsonUser.name,
-      replyId: '',
-    }
-
-    // Create（Posts）
-    // thenを使うことで、投稿の追加が完了した後に実行する処理を指定する
-    postData(postsUrl, newPost)
-      .then(() => {
-        // State更新
-        allPosts && setAllPosts([...allPosts, newPost])
-        showPosts && setShowPosts([...showPosts, newPost])
-      })
-      .then(() => {
-        // /にリダイレクト
-        router.push('/')
-      })
-  }
+  // useSnsで管理しているロジックを取得
+  const { addPost } = useSns()
 
   return (
     <div>

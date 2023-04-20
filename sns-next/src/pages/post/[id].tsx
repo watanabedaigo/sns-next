@@ -1,27 +1,26 @@
 import type { NextPage } from 'next'
-import { useRouter } from 'next/router'
-import { usePostContext } from 'contexts/PostContext'
-import { useAuthContext } from 'contexts/AuthContext'
 import { postData } from 'apis/sns'
 import { PostType } from 'types/PostType'
 import type { EventType } from 'types/EventType'
 import type { JsonUserType } from 'types/JsonUserType'
-import { putData, deleteData } from 'apis/sns'
 import Link from 'next/link'
-
 import { ulid } from 'ulid'
+import { useSns } from 'hooks/useSns'
 
 const Post: NextPage = () => {
-  // パスから投稿のidを取得し、jsonデータから該当する投稿を抽出する
-  // routerオブジェクト作成
-  const router = useRouter()
+  // useSnsで管理しているロジックを取得
+  const {
+    router,
+    allPosts,
+    setAllPosts,
+    firebaseUser,
+    jsonUsers,
+    deletePost,
+    toggleFavorite,
+  } = useSns()
 
   // パスパラメータから表示する投稿のidを取得
   const { id } = router.query
-
-  // contextで管理している値を取得
-  const { allPosts, setAllPosts, showPosts, setShowPosts } = usePostContext()
-  const { firebaseUser, jsonUsers, setJsonUsers } = useAuthContext()
 
   // 該当する投稿を抽出
   const targetPost = allPosts?.find((post) => {
@@ -38,7 +37,7 @@ const Post: NextPage = () => {
   const usersUrl = 'http://localhost:3001/users'
 
   // 投稿する関数を定義
-  const addPost = (e: EventType) => {
+  const addReplyPost = (e: EventType) => {
     e.preventDefault()
 
     // 投稿フォームの値を取得
@@ -70,60 +69,12 @@ const Post: NextPage = () => {
     return post.replyId.indexOf(id as string) !== -1
   })
 
-  // 投稿削除の関数を定義
-  const deletePost = (deletePostId: string) => {
-    // Delete（Posts）
-    // thenを使うことで、投稿の削除が完了した後に実行する処理を指定する
-    deleteData(postsUrl, deletePostId).then(() => {
-      // State更新
-      // allPostsからidプロパティの値がdeletePostIdではないデータのみ抽出
-      const newAllPosts = allPosts?.filter((post) => {
-        return post.id !== deletePostId
-      })
-      newAllPosts && setAllPosts([...newAllPosts])
-
-      // showPostsからidプロパティの値がdeletePostIdではないデータのみ抽出
-      const newShowPosts = showPosts?.filter((post) => {
-        return post.id !== deletePostId
-      })
-      newShowPosts && setShowPosts([...newShowPosts])
-    })
-  }
-
-  // 投稿をお気に入りに追加する関数を定義
-  const toggleFavorite = (targetPostId: string) => {
-    // json-serverのユーザーのfavoritePostIdプロパティ（配列）に投稿のidを追加
-    // ユーザーのfavoritePostIdプロパティを上書き
-    // 条件分岐
-    if (targetJsonUser.favoritePostId.indexOf(targetPostId) !== -1) {
-      // 既に含んでいる場合は取り除く
-      const newData = targetJsonUser.favoritePostId.filter((postId) => {
-        return postId !== targetPostId
-      })
-      targetJsonUser.favoritePostId = [...newData]
-    } else {
-      // 含んでいない場合は追加）d
-      targetJsonUser.favoritePostId.push(targetPostId)
-    }
-
-    // Update（Users）
-    putData(usersUrl, targetJsonUser.id, targetJsonUser)
-
-    // State更新
-    // 変更対象（ログインしているユーザー）以外のデータを抽出
-    const newUsers = jsonUsers?.filter((user) => {
-      return user.id !== targetJsonUser.id
-    }) as JsonUserType[]
-
-    setJsonUsers([...newUsers, targetJsonUser])
-  }
-
   return (
     <div>
       <p>{targetPost?.content}</p>
       <div>
         <p>reply</p>
-        <form onSubmit={addPost}>
+        <form onSubmit={addReplyPost}>
           <div>
             <textarea id="post" name="post" placeholder="post" />
           </div>
