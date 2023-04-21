@@ -1,5 +1,4 @@
 import { usePostContext } from 'contexts/PostContext'
-import { useAuthContext } from 'contexts/AuthContext'
 import type { JsonUserType } from 'types/JsonUserType'
 import { PostType } from 'types/PostType'
 import type { EventType } from 'types/EventType'
@@ -9,6 +8,8 @@ import { ulid } from 'ulid'
 import { auth } from 'auth/firebase'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { useAuth } from 'hooks/useAuth'
+import { usePost } from 'hooks/usePost'
 
 export const useSns = () => {
   // APIリクエスト先のURL
@@ -17,8 +18,8 @@ export const useSns = () => {
 
   // Context
   // contextで管理している値を取得
-  const { allPosts, setAllPosts, showPosts, setShowPosts } = usePostContext()
-  const { firebaseUser, jsonUsers, setJsonUsers } = useAuthContext()
+  const { allPosts, setAllPosts, showPosts, setShowPosts } = usePost()
+  const { firebaseUser, jsonUsers, setJsonUsers } = useAuth()
 
   // routerオブジェクト作成
   const router = useRouter()
