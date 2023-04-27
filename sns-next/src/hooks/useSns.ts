@@ -1,4 +1,3 @@
-import { usePostContext } from 'contexts/PostContext'
 import type { JsonUserType } from 'types/JsonUserType'
 import { PostType } from 'types/PostType'
 import type { EventType } from 'types/EventType'
@@ -12,14 +11,17 @@ import { useAuth } from 'hooks/useAuth'
 import { usePost } from 'hooks/usePost'
 
 export const useSns = () => {
-  // APIリクエスト先のURL
-  const postsUrl = 'http://localhost:3001/posts'
-  const usersUrl = 'http://localhost:3001/users'
-
+  // ============================================
+  // 共通部分
+  // ============================================
   // Context
   // contextで管理している値を取得
   const { allPosts, setAllPosts, showPosts, setShowPosts } = usePost()
   const { firebaseUser, jsonUsers, setJsonUsers } = useAuth()
+
+  // APIリクエスト先のURL
+  const postsUrl = 'http://localhost:3001/posts'
+  const usersUrl = 'http://localhost:3001/users'
 
   // routerオブジェクト作成
   const router = useRouter()
@@ -37,7 +39,7 @@ export const useSns = () => {
   const profileDefaultValue: string | number = targetJsonUser?.profile
 
   // - ユーザーの情報追加の関数を定義
-  const addInfo = (e: EventType) => {
+  const addInfo = (e: EventType['onSubmit']) => {
     e.preventDefault()
 
     // 名前フォームの値を取得
@@ -66,7 +68,7 @@ export const useSns = () => {
   }
 
   // - ユーザーの情報修正の関数を定義
-  const editInfo = (e: EventType) => {
+  const editInfo = (e: EventType['onSubmit']) => {
     e.preventDefault()
 
     // 名前フォームの値を取得
@@ -142,7 +144,7 @@ export const useSns = () => {
   // 投稿関数
   // ============================================
   // - 投稿追加の関数を定義
-  const addPost = (e: EventType) => {
+  const addPost = (e: EventType['onSubmit']) => {
     e.preventDefault()
 
     // 投稿フォームの値を取得
@@ -227,7 +229,7 @@ export const useSns = () => {
   // ログイン関係
   // ============================================
   // - ログイン
-  const signIn = async (e: EventType) => {
+  const signIn = async (e: EventType['onSubmit']) => {
     e.preventDefault()
 
     // メールフォームの値を取得
@@ -250,7 +252,7 @@ export const useSns = () => {
   }
 
   // - 新規登録
-  const signUp = async (e: EventType) => {
+  const signUp = async (e: EventType['onSubmit']) => {
     e.preventDefault()
 
     // メールフォームの値を取得
@@ -301,7 +303,7 @@ export const useSns = () => {
   // ユーザーページ
   // ============================================
   // タブを切り替える関数を定義
-  const changeTab = (e: EventType) => {
+  const changeTab = (e: EventType['onClick']) => {
     // クリックされたボタンのidと、現在aria-selected属性がtrueになっているボタンのidを取得
     const targetButtonId = e.currentTarget.getAttribute('id')
     const activeButton = document.querySelector('[aria-selected = "true"]')

@@ -25,13 +25,12 @@ export const useAuthContext = () => {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   // useAuthで管理しているロジックを取得
-  const { firebaseUser, jsonUsers, jsonUser, setJsonUsers, loading } = useAuth()
+  const { firebaseUser, jsonUsers, setJsonUsers, loading } = useAuth()
 
   // contextで管理する値を定義
   const value = {
     firebaseUser,
     jsonUsers,
-    jsonUser,
     setJsonUsers,
   }
 

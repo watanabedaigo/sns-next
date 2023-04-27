@@ -11,8 +11,6 @@ export const useAuth = () => {
   const [firebaseUser, setFirebaseUser] = useState<FirebaseUserType>(null)
   // 「全ての」json-server側のユーザーを扱う
   const [jsonUsers, setJsonUsers] = useState<JsonUserType[]>([])
-  // 「ログインしている」json-server側のユーザーを扱う
-  const [jsonUser, setJsonUser] = useState<JsonUserType>()
   // リロード対策用のフラッグ
   const [loading, setLoading] = useState<boolean>(true)
 
@@ -60,7 +58,6 @@ export const useAuth = () => {
   return {
     firebaseUser,
     jsonUsers,
-    jsonUser,
     setJsonUsers,
     loading,
   }

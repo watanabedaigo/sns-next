@@ -9,7 +9,9 @@
     "lint": "eslint --ext .ts,.tsx src",
     "lint:fix": "eslint --ext .ts,.tsx src --fix",
     "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json,css}'",
-    "json-server": "json-server --watch db.json --port 3001"
+    "json-server": "json-server --watch db.json --port 3001",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^5.48.1",
@@ -29,12 +31,22 @@
     "ulid": "^2.3.0"
   },
   "devDependencies": {
+    "@storybook/addon-essentials": "^7.0.7",
+    "@storybook/addon-interactions": "^7.0.7",
+    "@storybook/addon-links": "^7.0.7",
+    "@storybook/addon-mdx-gfm": "^7.0.7",
+    "@storybook/blocks": "^7.0.7",
+    "@storybook/nextjs": "^7.0.7",
+    "@storybook/react": "^7.0.7",
+    "@storybook/testing-library": "^0.0.14-next.2",
     "@types/node": "18.11.18",
     "@types/react": "18.0.26",
     "@types/react-dom": "18.0.10",
     "eslint": "8.31.0",
     "eslint-config-next": "13.1.1",
+    "eslint-plugin-storybook": "^0.6.11",
     "sass": "^1.57.1",
+    "storybook": "^7.0.7",
     "typescript": "4.9.4"
   }
 }
