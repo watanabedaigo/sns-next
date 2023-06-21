@@ -1,10 +1,10 @@
-import '../styles/globals.css'
-// import 'ress'
+import '../styles/reset.min.css'
+import '../styles/global.scss'
 import type { AppProps } from 'next/app'
 import { AuthProvider } from 'contexts/AuthContext'
 import { PostProvider } from 'contexts/PostContext'
 
-import Header from 'components/modules/Header'
+import Header from 'components/modules/Header/Header'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
