@@ -2,17 +2,16 @@
   "users": [
     {
       "id": "uiEG0MdVfOgZQ9BaVPEkaOPhlqh1",
-      "name": "aaa_name_edit",
+      "name": "aaa_name_edit2",
       "profile": "aaa_profile_edit",
       "favoritePostId": [
-        "01GQ7CNE9NMS1A13XRFSCAHGPD",
         "01GTY3JMFP73V8RHZFBKH7S7ZS",
-        "01GS7YCF4GEC2KVGPVC2TJG8WA"
+        "01GQ7CNE9NMS1A13XRFSCAHGPD",
+        "01GS7YCR3X37WZ52MJVCA4JZJB"
       ],
       "followUserId": [
-        "sSWKf22XHKaE4PjrDcT8USeLAVf2",
-        "HwghZJ58NRO5Mgv9hWJGL9Ucwar2",
-        "iIyTVRuHqCbFL9kuoLcmW2XOi8T2"
+        "gXPRfnGffgTWKFxtRRRJURKl0Yn1",
+        "sSWKf22XHKaE4PjrDcT8USeLAVf2"
       ],
       "follwedUserId": []
     },
@@ -130,6 +129,14 @@
       "userId": "uiEG0MdVfOgZQ9BaVPEkaOPhlqh1",
       "userName": "aaa_name_edit",
       "replyId": "01GS7YCF4GEC2KVGPVC2TJG8WA"
+    },
+    {
+      "id": "01H3EJT9WH65WA1VQEM77HAD58",
+      "content": "test",
+      "addFavoriteUserId": [],
+      "userId": "uiEG0MdVfOgZQ9BaVPEkaOPhlqh1",
+      "userName": "aaa_name_edit",
+      "replyId": ""
     }
   ]
 }

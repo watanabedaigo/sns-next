@@ -209,7 +209,7 @@ export const useSns = () => {
       })
       targetJsonUser.favoritePostId = [...newData]
     } else {
-      // 含んでいない場合は追加）d
+      // 含んでいない場合は追加）
       targetJsonUser.favoritePostId.push(targetPostId)
     }
 
@@ -305,7 +305,8 @@ export const useSns = () => {
   // タブを切り替える関数を定義
   const changeTab = (e: EventType['onClick']) => {
     // クリックされたボタンのidと、現在aria-selected属性がtrueになっているボタンのidを取得
-    const targetButtonId = e.currentTarget.getAttribute('id')
+    const targetButton = e.currentTarget
+    const targetButtonId = targetButton.getAttribute('id')
     const activeButton = document.querySelector('[aria-selected = "true"]')
     const activeButtonId = activeButton?.getAttribute('id')
 
@@ -316,7 +317,7 @@ export const useSns = () => {
       activeButton?.setAttribute('aria-selected', 'false')
 
       // クリックされたボタンのaria-selected属性の値をtrueにする
-      e.currentTarget.setAttribute('aria-selected', 'true')
+      targetButton.setAttribute('aria-selected', 'true')
 
       // タブ
       // 現在aria-hidden属性がfalseになっているタブを取得し、trueに変える
