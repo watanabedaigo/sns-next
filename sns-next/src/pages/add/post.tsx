@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import { useSns } from 'hooks/useSns'
+import { Button } from 'components/atoms/Button'
 
 const AddPost: NextPage = () => {
   // useSnsで管理しているロジックを取得
@@ -14,7 +15,7 @@ const AddPost: NextPage = () => {
             <textarea id="post" name="post" placeholder="post" />
           </div>
           <div>
-            <button>投稿</button>
+            <Button type="submit" label="post" bgColor="bgWhite" />
           </div>
         </form>
       </div>

@@ -6,6 +6,7 @@ import type { JsonUserType } from 'types/JsonUserType'
 import Link from 'next/link'
 import { ulid } from 'ulid'
 import { useSns } from 'hooks/useSns'
+import { Button } from 'components/atoms/Button'
 
 const Post: NextPage = () => {
   // useSnsで管理しているロジックを取得
@@ -37,7 +38,7 @@ const Post: NextPage = () => {
   const usersUrl = 'http://localhost:3001/users'
 
   // 投稿する関数を定義
-  const addReplyPost = (e: EventType) => {
+  const addReplyPost = (e: EventType['onSubmit']) => {
     e.preventDefault()
 
     // 投稿フォームの値を取得
@@ -79,7 +80,7 @@ const Post: NextPage = () => {
             <textarea id="post" name="post" placeholder="post" />
           </div>
           <div>
-            <button>返信</button>
+            <Button type="submit" label="reply" bgColor="bgWhite" />
           </div>
         </form>
       </div>
@@ -96,23 +97,29 @@ const Post: NextPage = () => {
               </Link>
               {firebaseUser && (
                 <div>
-                  <button
+                  <Button
+                    label={
+                      targetJsonUser?.favoritePostId.indexOf(post.id) !== -1
+                        ? 'remove'
+                        : 'add'
+                    }
+                    bgColor={
+                      targetJsonUser?.favoritePostId.indexOf(post.id) !== -1
+                        ? 'bgBlack'
+                        : 'bgWhite'
+                    }
                     onClick={() => {
                       toggleFavorite(post.id)
                     }}
-                  >
-                    {targetJsonUser?.favoritePostId.indexOf(post.id) !== -1
-                      ? 'remove'
-                      : 'add'}
-                  </button>
+                  />
                   {post.userId === firebaseUser?.uid && (
-                    <button
+                    <Button
+                      label="delete"
+                      bgColor="bgRed"
                       onClick={() => {
                         deletePost(post.id)
                       }}
-                    >
-                      delete
-                    </button>
+                    />
                   )}
                 </div>
               )}

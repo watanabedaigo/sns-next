@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import { useSns } from 'hooks/useSns'
+import { Button } from 'components/atoms/Button'
 
 const EditUserInfo: NextPage = () => {
   // useSnsで管理しているロジックを取得
@@ -31,7 +32,7 @@ const EditUserInfo: NextPage = () => {
             />
           </div>
           <div>
-            <button>修正</button>
+            <Button type="submit" label="edit" bgColor="bgWhite" />
           </div>
         </form>
       </div>

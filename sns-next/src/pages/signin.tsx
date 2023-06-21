@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import { useSns } from 'hooks/useSns'
+import { Button } from 'components/atoms/Button'
 
 const SignIn: NextPage = () => {
   // useSnsで管理しているロジックを取得
@@ -19,7 +20,7 @@ const SignIn: NextPage = () => {
             <input id="password" name="password" type="password" />
           </div>
           <div>
-            <button>ログイン</button>
+            <Button type="submit" label="login" bgColor="bgWhite" />
           </div>
         </form>
       </div>

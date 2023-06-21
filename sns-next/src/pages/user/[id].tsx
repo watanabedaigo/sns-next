@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Link from 'next/link'
 import { useSns } from 'hooks/useSns'
+import { Button } from 'components/atoms/Button'
 
 const User: NextPage = () => {
   // useSnsで管理しているロジックを取得
@@ -51,15 +52,21 @@ const User: NextPage = () => {
         <div>
           <h1>{targetUser?.name}</h1>
           {targetJsonUser?.id !== id && (
-            <button
+            <Button
+              label={
+                targetJsonUser?.followUserId.indexOf(id as string) !== -1
+                  ? 'remove'
+                  : 'add'
+              }
+              bgColor={
+                targetJsonUser?.followUserId.indexOf(id as string) !== -1
+                  ? 'bgBlack'
+                  : 'bgWhite'
+              }
               onClick={() => {
                 toggleFollow(id as string)
               }}
-            >
-              {targetJsonUser?.followUserId.indexOf(id as string) !== -1
-                ? 'remove'
-                : 'add'}
-            </button>
+            />
           )}
         </div>
         <ul>
@@ -120,13 +127,13 @@ const User: NextPage = () => {
                       <p>{post.content}</p>
                     </Link>
                     {post.userId === firebaseUser?.uid && (
-                      <button
+                      <Button
+                        label="delete"
+                        bgColor="bgRed"
                         onClick={() => {
                           deletePost(post.id)
                         }}
-                      >
-                        delete
-                      </button>
+                      />
                     )}
                   </li>
                 )
@@ -146,25 +153,33 @@ const User: NextPage = () => {
                 return (
                   <li key={post?.content}>
                     {post?.content}
-                    <button
+                    <Button
+                      label={
+                        targetJsonUser?.favoritePostId.indexOf(
+                          post?.id as string
+                        ) !== -1
+                          ? 'remove'
+                          : 'add'
+                      }
+                      bgColor={
+                        targetJsonUser?.favoritePostId.indexOf(
+                          post?.id as string
+                        ) !== -1
+                          ? 'bgBlack'
+                          : 'bgWhite'
+                      }
                       onClick={() => {
                         toggleFavorite(post?.id as string)
                       }}
-                    >
-                      {targetJsonUser?.favoritePostId.indexOf(
-                        post?.id as string
-                      ) !== -1
-                        ? 'remove'
-                        : 'add'}
-                    </button>
+                    />
                     {post?.userId === firebaseUser?.uid && (
-                      <button
+                      <Button
+                        label="delete"
+                        bgColor="bgRed"
                         onClick={() => {
                           deletePost(post?.id as string)
                         }}
-                      >
-                        delete
-                      </button>
+                      />
                     )}
                   </li>
                 )
@@ -185,17 +200,25 @@ const User: NextPage = () => {
                   <li key={user?.id}>
                     <Link href={`/user/${user?.id}`}>{user?.name}</Link>
                     {targetJsonUser?.id !== user?.id && (
-                      <button
+                      <Button
+                        label={
+                          targetJsonUser?.followUserId.indexOf(
+                            user?.id as string
+                          ) !== -1
+                            ? 'remove'
+                            : 'add'
+                        }
+                        bgColor={
+                          targetJsonUser?.followUserId.indexOf(
+                            user?.id as string
+                          ) !== -1
+                            ? 'bgBlack'
+                            : 'bgWhite'
+                        }
                         onClick={() => {
                           toggleFollow(user?.id as string)
                         }}
-                      >
-                        {targetJsonUser?.followUserId.indexOf(
-                          user?.id as string
-                        ) !== -1
-                          ? 'remove'
-                          : 'add'}
-                      </button>
+                      />
                     )}
                   </li>
                 )

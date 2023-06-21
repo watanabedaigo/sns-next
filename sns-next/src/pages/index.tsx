@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Link from 'next/link'
 import { useSns } from 'hooks/useSns'
+import { Button } from 'components/atoms/Button'
 
 const Home: NextPage = () => {
   // useSnsで管理しているロジックを取得
@@ -27,23 +28,29 @@ const Home: NextPage = () => {
               {firebaseUser && (
                 <div>
                   <Link href={`/post/${post.id}`}>reply</Link>
-                  <button
+                  <Button
+                    label={
+                      targetJsonUser?.favoritePostId.indexOf(post.id) !== -1
+                        ? 'remove'
+                        : 'add'
+                    }
+                    bgColor={
+                      targetJsonUser?.favoritePostId.indexOf(post.id) !== -1
+                        ? 'bgBlack'
+                        : 'bgWhite'
+                    }
                     onClick={() => {
                       toggleFavorite(post.id)
                     }}
-                  >
-                    {targetJsonUser?.favoritePostId.indexOf(post.id) !== -1
-                      ? 'remove'
-                      : 'add'}
-                  </button>
+                  />
                   {post.userId === firebaseUser?.uid && (
-                    <button
+                    <Button
+                      label="delete"
+                      bgColor="bgRed"
                       onClick={() => {
                         deletePost(post.id)
                       }}
-                    >
-                      delete
-                    </button>
+                    />
                   )}
                 </div>
               )}
