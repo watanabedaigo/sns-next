@@ -23,8 +23,8 @@ const Users: NextPage = () => {
                   }
                   bgColor={
                     targetJsonUser?.followUserId.indexOf(user.id) !== -1
-                      ? 'bgBlack'
-                      : 'bgWhite'
+                      ? 'bgBlue'
+                      : 'bgOrange'
                   }
                   onClick={() => {
                     toggleFollow(user.id)

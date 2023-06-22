@@ -60,8 +60,8 @@ const User: NextPage = () => {
               }
               bgColor={
                 targetJsonUser?.followUserId.indexOf(id as string) !== -1
-                  ? 'bgBlack'
-                  : 'bgWhite'
+                  ? 'bgBlue'
+                  : 'bgOrange'
               }
               onClick={() => {
                 toggleFollow(id as string)
@@ -165,8 +165,8 @@ const User: NextPage = () => {
                         targetJsonUser?.favoritePostId.indexOf(
                           post?.id as string
                         ) !== -1
-                          ? 'bgBlack'
-                          : 'bgWhite'
+                          ? 'bgBlue'
+                          : 'bgOrange'
                       }
                       onClick={() => {
                         toggleFavorite(post?.id as string)
@@ -212,8 +212,8 @@ const User: NextPage = () => {
                           targetJsonUser?.followUserId.indexOf(
                             user?.id as string
                           ) !== -1
-                            ? 'bgBlack'
-                            : 'bgWhite'
+                            ? 'bgBlue'
+                            : 'bgOrange'
                         }
                         onClick={() => {
                           toggleFollow(user?.id as string)

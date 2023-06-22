@@ -105,8 +105,8 @@ const Post: NextPage = () => {
                     }
                     bgColor={
                       targetJsonUser?.favoritePostId.indexOf(post.id) !== -1
-                        ? 'bgBlack'
-                        : 'bgWhite'
+                        ? 'bgBlue'
+                        : 'bgOrange'
                     }
                     onClick={() => {
                       toggleFavorite(post.id)

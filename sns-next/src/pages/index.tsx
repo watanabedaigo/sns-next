@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Link from 'next/link'
+import styles from 'components/atoms/Button/styles.module.scss'
 import { useSns } from 'hooks/useSns'
 import { Button } from 'components/atoms/Button'
 
@@ -27,7 +28,12 @@ const Home: NextPage = () => {
               </Link>
               {firebaseUser && (
                 <div>
-                  <Link href={`/post/${post.id}`}>reply</Link>
+                  <Link
+                    href={`/post/${post.id}`}
+                    className={[styles.btn, styles.bgWhite].join(' ')}
+                  >
+                    reply
+                  </Link>
                   <Button
                     label={
                       targetJsonUser?.favoritePostId.indexOf(post.id) !== -1
@@ -36,8 +42,8 @@ const Home: NextPage = () => {
                     }
                     bgColor={
                       targetJsonUser?.favoritePostId.indexOf(post.id) !== -1
-                        ? 'bgBlack'
-                        : 'bgWhite'
+                        ? 'bgBlue'
+                        : 'bgOrange'
                     }
                     onClick={() => {
                       toggleFavorite(post.id)

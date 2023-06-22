@@ -5,6 +5,7 @@ import { signOut } from 'firebase/auth'
 import { useRouter } from 'next/router'
 import type { JsonUserType } from 'types/JsonUserType'
 import Link from 'next/link'
+import styles from 'components/atoms/Button/styles.module.scss'
 import { deleteData } from 'apis/sns'
 import { Button } from 'components/atoms/Button'
 
@@ -79,28 +80,39 @@ const Header: React.FC = React.memo(() => {
               <p>アカウント名：{targetJsonUser.name}</p>
             </li>
             <li>
-              <Link href="/">Home</Link>
+              <Link href="/" className={[styles.btn, styles.bgWhite].join(' ')}>
+                Home
+              </Link>
             </li>
             <li>
-              <Button label="logout" bgColor="bgWhite" onClick={logout} />
+              <Button label="logout" bgColor="bgBlue" onClick={logout} />
             </li>
             <li>
-              <Link href={`/edit/user/${targetJsonUser.name}`}>
+              <Link
+                href={`/edit/user/${targetJsonUser.name}`}
+                className={[styles.btn, styles.bgWhite].join(' ')}
+              >
                 EditUserInfo
               </Link>
             </li>
             <li>
-              <Button
-                label="deleteUser"
-                bgColor="bgWhite"
-                onClick={deleteUser}
-              />
+              <Button label="deleteUser" bgColor="bgRed" onClick={deleteUser} />
             </li>
             <li>
-              <Link href="/add/post">Post</Link>
+              <Link
+                href="/add/post"
+                className={[styles.btn, styles.bgWhite].join(' ')}
+              >
+                Post
+              </Link>
             </li>
             <li>
-              <Link href="/users">Users</Link>
+              <Link
+                href="/users"
+                className={[styles.btn, styles.bgWhite].join(' ')}
+              >
+                Users
+              </Link>
             </li>
           </ul>
         </div>
@@ -109,16 +121,33 @@ const Header: React.FC = React.memo(() => {
         <div>
           <ul>
             <li>
-              <Link href="/">Home</Link>
+              <Link href="/" className={[styles.btn, styles.bgWhite].join(' ')}>
+                Home
+              </Link>
             </li>
             <li>
-              <Link href="/signin">SignIn</Link>
+              <Link
+                href="/signin"
+                className={[styles.btn, styles.bgWhite].join(' ')}
+              >
+                SignIn
+              </Link>
             </li>
             <li>
-              <Link href="/signup">SignUp</Link>
+              <Link
+                href="/signup"
+                className={[styles.btn, styles.bgWhite].join(' ')}
+              >
+                SignUp
+              </Link>
             </li>
             <li>
-              <Link href="/users">Users</Link>
+              <Link
+                href="/users"
+                className={[styles.btn, styles.bgWhite].join(' ')}
+              >
+                Users
+              </Link>
             </li>
           </ul>
         </div>
