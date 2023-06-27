@@ -9,6 +9,8 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { useAuth } from 'hooks/useAuth'
 import { usePost } from 'hooks/usePost'
+import { useState } from 'react'
+import { action } from '@storybook/addon-actions'
 
 export const useSns = () => {
   // ============================================
@@ -332,6 +334,21 @@ export const useSns = () => {
     }
   }
 
+  // ============================================
+  // コンポーネント
+  // ============================================
+  // HamburgerButton
+  // State
+  // 開閉を管理
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+
+  // Function
+  // stateの値を反転する
+  const toggleMenu = () => {
+    setIsOpen(!isOpen)
+    action('toggleMenu')(!isOpen)
+  }
+
   return {
     allPosts,
     setAllPosts,
@@ -353,5 +370,7 @@ export const useSns = () => {
     signIn,
     signUp,
     changeTab,
+    isOpen,
+    toggleMenu,
   }
 }
