@@ -2118,6 +2118,28 @@
   "resolved" "https://registry.npmjs.org/@sinclair/typebox/-/typebox-0.25.24.tgz"
   "version" "0.25.24"
 
+"@storybook/addon-actions@^7.0.23":
+  "integrity" "sha512-xsLUZez6fzHc+be8BypVO5aA7kjeH9jymLAib68SSQoF0GQry7mb/fhumifQno2BKfCyCw++lYqLHzwV0EISxg=="
+  "resolved" "https://registry.npmjs.org/@storybook/addon-actions/-/addon-actions-7.0.23.tgz"
+  "version" "7.0.23"
+  dependencies:
+    "@storybook/client-logger" "7.0.23"
+    "@storybook/components" "7.0.23"
+    "@storybook/core-events" "7.0.23"
+    "@storybook/global" "^5.0.0"
+    "@storybook/manager-api" "7.0.23"
+    "@storybook/preview-api" "7.0.23"
+    "@storybook/theming" "7.0.23"
+    "@storybook/types" "7.0.23"
+    "dequal" "^2.0.2"
+    "lodash" "^4.17.21"
+    "polished" "^4.2.2"
+    "prop-types" "^15.7.2"
+    "react-inspector" "^6.0.0"
+    "telejson" "^7.0.3"
+    "ts-dedent" "^2.0.0"
+    "uuid" "^9.0.0"
+
 "@storybook/addon-actions@7.0.20":
   "integrity" "sha512-otdbuEcHtzb6BzYdCYXyoZ3yNwcMdGSeGKf1aMj0b+C6b23XMnwDa90nzH3JST/sb8PJ1o5MHKWPQJ8UKt72Ug=="
   "resolved" "https://registry.npmjs.org/@storybook/addon-actions/-/addon-actions-7.0.20.tgz"
@@ -2454,6 +2476,18 @@
     "qs" "^6.10.0"
     "telejson" "^7.0.3"
 
+"@storybook/channel-postmessage@7.0.23":
+  "integrity" "sha512-SfXTV55Z9U5rN1OuyR56s+PUpav3b4SgXtP67bnNsrv7dkKhBwr0DUUJogIRnjmY0Loy/hLvJ23kfmKXPWC4vQ=="
+  "resolved" "https://registry.npmjs.org/@storybook/channel-postmessage/-/channel-postmessage-7.0.23.tgz"
+  "version" "7.0.23"
+  dependencies:
+    "@storybook/channels" "7.0.23"
+    "@storybook/client-logger" "7.0.23"
+    "@storybook/core-events" "7.0.23"
+    "@storybook/global" "^5.0.0"
+    "qs" "^6.10.0"
+    "telejson" "^7.0.3"
+
 "@storybook/channel-websocket@7.0.20":
   "integrity" "sha512-nzpnvUAdOgEn1FhUlaTl/ImSoiRJQs1UmLPxDtqAOGo01W+GIlj17Y+0TYCaG3EJoRVv59XPIrqywut2o6j40Q=="
   "resolved" "https://registry.npmjs.org/@storybook/channel-websocket/-/channel-websocket-7.0.20.tgz"
@@ -2468,6 +2502,11 @@
   "integrity" "sha512-AL5GGSQ8WTDUoh3gitKEzo3fu7Vq5okXq2pAknAZlQA2Oio+HHO5nMeXvOfGdvo/tzbpNE3n5utmCJz006xrCA=="
   "resolved" "https://registry.npmjs.org/@storybook/channels/-/channels-7.0.20.tgz"
   "version" "7.0.20"
+
+"@storybook/channels@7.0.23":
+  "integrity" "sha512-cCxR3Z84YQjsVMPgFTI+kDVNOlgXSDakwjkNFBznU+s2qhGW5eZt2g9YRDeVDQ6AjR4j4RrGhwddRq4lQZF2pg=="
+  "resolved" "https://registry.npmjs.org/@storybook/channels/-/channels-7.0.23.tgz"
+  "version" "7.0.23"
 
 "@storybook/cli@7.0.20":
   "integrity" "sha512-ZYBJL1d7nWXQok7SriF18h0YPO38Eu1YxR8b1VHgOZYKZhuQmtvhmjMTSgpoGjnynNkEaV3fvm6+KYTjSqYcnw=="
@@ -2529,6 +2568,13 @@
   dependencies:
     "@storybook/global" "^5.0.0"
 
+"@storybook/client-logger@7.0.23":
+  "integrity" "sha512-L287SRO8EaYOxTpryV7N/1WCL5I1IFs5Naiq3FpybhguUP7F3Si7KWvVdFmSW06K9jNj2IEQ/8zBRM8ra4ttyg=="
+  "resolved" "https://registry.npmjs.org/@storybook/client-logger/-/client-logger-7.0.23.tgz"
+  "version" "7.0.23"
+  dependencies:
+    "@storybook/global" "^5.0.0"
+
 "@storybook/codemod@7.0.20":
   "integrity" "sha512-ZyxtYxp+1yEV0Z7qGeov/neeE9yYEOzobNuHDJ/nA0HNrXkeIolmvb9TFhSpOiSxRdHJhpBQG/U76KZMdAhNdw=="
   "resolved" "https://registry.npmjs.org/@storybook/codemod/-/codemod-7.0.20.tgz"
@@ -2558,6 +2604,20 @@
     "@storybook/global" "^5.0.0"
     "@storybook/theming" "7.0.20"
     "@storybook/types" "7.0.20"
+    "memoizerific" "^1.11.3"
+    "use-resize-observer" "^9.1.0"
+    "util-deprecate" "^1.0.2"
+
+"@storybook/components@7.0.23":
+  "integrity" "sha512-nEMWjqL34uDzQsHM/MJQt6IoeVzbyONeS14UsS/WKTVpnQvxYLeZAg/kyMwZsl28U25na3d+EhZKv/0mWXw5Nw=="
+  "resolved" "https://registry.npmjs.org/@storybook/components/-/components-7.0.23.tgz"
+  "version" "7.0.23"
+  dependencies:
+    "@storybook/client-logger" "7.0.23"
+    "@storybook/csf" "^0.1.0"
+    "@storybook/global" "^5.0.0"
+    "@storybook/theming" "7.0.23"
+    "@storybook/types" "7.0.23"
     "memoizerific" "^1.11.3"
     "use-resize-observer" "^9.1.0"
     "util-deprecate" "^1.0.2"
@@ -2599,6 +2659,11 @@
   "integrity" "sha512-gUBQsbcDmRufmg8LdH7D57c/9BQ+cPi2vBcXdudmxeJFafGwDmLRu1mlv9rxlW4kicn/LZWJjKXtq4XXzF4OGg=="
   "resolved" "https://registry.npmjs.org/@storybook/core-events/-/core-events-7.0.20.tgz"
   "version" "7.0.20"
+
+"@storybook/core-events@7.0.23":
+  "integrity" "sha512-Hdt18p/qbgJc+1wY2dGcdjmlsuNXWsoLTaXrjInuvr1U0kmKmKs0VMaB0cFubnUgCmB3YQWTGnVr3q8iz9iB7g=="
+  "resolved" "https://registry.npmjs.org/@storybook/core-events/-/core-events-7.0.23.tgz"
+  "version" "7.0.23"
 
 "@storybook/core-server@7.0.20":
   "integrity" "sha512-hNKwi5QZMhfeqw8+UmU6hCIIQfTC5r1ItaKZIeF43HnSt4hNKoA9fHu1UCS5UA56KddBxSAPggroEF+Ah8ZHcg=="
@@ -2751,6 +2816,27 @@
     "telejson" "^7.0.3"
     "ts-dedent" "^2.0.0"
 
+"@storybook/manager-api@7.0.23":
+  "integrity" "sha512-tvq5+xVkpqWDDnvyoi/sfAR7ZaIu7oiommMtuEt1/mhItn9nv8TXkWbthWUlwRgUrPiJJl2BNSnXMRS+byOAZg=="
+  "resolved" "https://registry.npmjs.org/@storybook/manager-api/-/manager-api-7.0.23.tgz"
+  "version" "7.0.23"
+  dependencies:
+    "@storybook/channels" "7.0.23"
+    "@storybook/client-logger" "7.0.23"
+    "@storybook/core-events" "7.0.23"
+    "@storybook/csf" "^0.1.0"
+    "@storybook/global" "^5.0.0"
+    "@storybook/router" "7.0.23"
+    "@storybook/theming" "7.0.23"
+    "@storybook/types" "7.0.23"
+    "dequal" "^2.0.2"
+    "lodash" "^4.17.21"
+    "memoizerific" "^1.11.3"
+    "semver" "^7.3.7"
+    "store2" "^2.14.2"
+    "telejson" "^7.0.3"
+    "ts-dedent" "^2.0.0"
+
 "@storybook/manager@7.0.20":
   "integrity" "sha512-m79G2FMCIBQlF5FtnCoPP3B0Uy79SWmYLSTMmK/a2d5MS26d7eNOVT1W6httPMZlgy26/OjO7JcQVQsliQ4nxw=="
   "resolved" "https://registry.npmjs.org/@storybook/manager/-/manager-7.0.20.tgz"
@@ -2862,6 +2948,27 @@
     "ts-dedent" "^2.0.0"
     "util-deprecate" "^1.0.2"
 
+"@storybook/preview-api@7.0.23":
+  "integrity" "sha512-kXhDX6gVjQu4Lx4SnCW5Yt5W/TbQofp9SL0paB1ywsJ15xSAPU5KVILe9OWAOba2YUnk7sHux/xDX/gH5RCpVw=="
+  "resolved" "https://registry.npmjs.org/@storybook/preview-api/-/preview-api-7.0.23.tgz"
+  "version" "7.0.23"
+  dependencies:
+    "@storybook/channel-postmessage" "7.0.23"
+    "@storybook/channels" "7.0.23"
+    "@storybook/client-logger" "7.0.23"
+    "@storybook/core-events" "7.0.23"
+    "@storybook/csf" "^0.1.0"
+    "@storybook/global" "^5.0.0"
+    "@storybook/types" "7.0.23"
+    "@types/qs" "^6.9.5"
+    "dequal" "^2.0.2"
+    "lodash" "^4.17.21"
+    "memoizerific" "^1.11.3"
+    "qs" "^6.10.0"
+    "synchronous-promise" "^2.0.15"
+    "ts-dedent" "^2.0.0"
+    "util-deprecate" "^1.0.2"
+
 "@storybook/preview@7.0.20":
   "integrity" "sha512-ayC7Aud0WM91ki+UM/CInd3GbGPmkUaeT6fqs9zvH8H4QQGznr9E8sI9IUQN0dbpGWayZn0m7Ma89EHwpWOwiw=="
   "resolved" "https://registry.npmjs.org/@storybook/preview/-/preview-7.0.20.tgz"
@@ -2921,6 +3028,15 @@
     "memoizerific" "^1.11.3"
     "qs" "^6.10.0"
 
+"@storybook/router@7.0.23":
+  "integrity" "sha512-qZJJJKqcyhTAXRWxGwBlL97BSt/TbWcXNUB1H3Q4ufKrgdrCRuThfr8R8Fir+iggr7vF3QnMQ7rCyPT/yB56/g=="
+  "resolved" "https://registry.npmjs.org/@storybook/router/-/router-7.0.23.tgz"
+  "version" "7.0.23"
+  dependencies:
+    "@storybook/client-logger" "7.0.23"
+    "memoizerific" "^1.11.3"
+    "qs" "^6.10.0"
+
 "@storybook/store@7.0.20":
   "integrity" "sha512-83fZ1VStLDzaERcx9GfjdUnzfG9n9dVCRf1hdmLvOBZAmVqjw702gdgl5tjh1wpuHTfZlXwZv5VQUjlvRRntAA=="
   "resolved" "https://registry.npmjs.org/@storybook/store/-/store-7.0.20.tgz"
@@ -2965,12 +3081,32 @@
     "@storybook/global" "^5.0.0"
     "memoizerific" "^1.11.3"
 
+"@storybook/theming@7.0.23":
+  "integrity" "sha512-hKmpjFS24YK0vl69KhqNauARTgxQu5mvlifHmu7xO80bigXi6NzA5VyyCMHO1SKVFJwPBVHHfauQCenSRm2PDQ=="
+  "resolved" "https://registry.npmjs.org/@storybook/theming/-/theming-7.0.23.tgz"
+  "version" "7.0.23"
+  dependencies:
+    "@emotion/use-insertion-effect-with-fallbacks" "^1.0.0"
+    "@storybook/client-logger" "7.0.23"
+    "@storybook/global" "^5.0.0"
+    "memoizerific" "^1.11.3"
+
 "@storybook/types@7.0.20":
   "integrity" "sha512-Z7RhHRnhrPd2jXPZtjbOILj1QgylqlsD3cFIYMcSz3yvUvxLRx3BKCftXyFbIuxr0QoCJE38adRp7YGO9uJnQQ=="
   "resolved" "https://registry.npmjs.org/@storybook/types/-/types-7.0.20.tgz"
   "version" "7.0.20"
   dependencies:
     "@storybook/channels" "7.0.20"
+    "@types/babel__core" "^7.0.0"
+    "@types/express" "^4.7.0"
+    "file-system-cache" "^2.0.0"
+
+"@storybook/types@7.0.23":
+  "integrity" "sha512-ziszL3OfhTT5PHE7kiQjWWx3Lw3qro8eLX+56dXDNgmft5LS66yEANcaA7OzxLnEgdyWSxJqgrVo6r0JwHp2Eg=="
+  "resolved" "https://registry.npmjs.org/@storybook/types/-/types-7.0.23.tgz"
+  "version" "7.0.23"
+  dependencies:
+    "@storybook/channels" "7.0.23"
     "@types/babel__core" "^7.0.0"
     "@types/express" "^4.7.0"
     "file-system-cache" "^2.0.0"
@@ -10088,9 +10224,9 @@
     "lru-cache" "^6.0.0"
 
 "semver@^7.3.7":
-  "integrity" "sha512-Wvss5ivl8TMRZXXESstBA4uR5iXgEN/VC5/sOcuXdVLzcdkz4HWetIoRfG5gb5X+ij/G9rw9YoGn3QoQ8OCSpw=="
-  "resolved" "https://registry.npmjs.org/semver/-/semver-7.5.1.tgz"
-  "version" "7.5.1"
+  "integrity" "sha512-QBlUtyVk/5EeHbi7X0fw6liDZc7BBmEaSYn01fMU1OUYbf6GPsbTtd8WmnqbI20SeycoHSeiybkE/q1Q+qlThQ=="
+  "resolved" "https://registry.npmjs.org/semver/-/semver-7.5.3.tgz"
+  "version" "7.5.3"
   dependencies:
     "lru-cache" "^6.0.0"
 
