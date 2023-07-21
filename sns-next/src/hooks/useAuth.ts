@@ -13,6 +13,8 @@ export const useAuth = () => {
   const [jsonUsers, setJsonUsers] = useState<JsonUserType[]>([])
   // リロード対策用のフラッグ
   const [loading, setLoading] = useState<boolean>(true)
+  // ログイン判定
+  const [isLogin, setIsLogin] = useState<boolean>(false)
 
   // APIリクエスト先のURL
   const usersUrl = 'http://localhost:3001/users'
@@ -46,7 +48,12 @@ export const useAuth = () => {
       // State更新
       setFirebaseUser(user)
       setLoading(false)
-      // setJsonUser(targetJsonUser)
+
+      if (user) {
+        setIsLogin(true)
+      } else {
+        setIsLogin(false)
+      }
     })
 
     return () => {
@@ -60,5 +67,7 @@ export const useAuth = () => {
     jsonUsers,
     setJsonUsers,
     loading,
+    isLogin,
+    setIsLogin,
   }
 }

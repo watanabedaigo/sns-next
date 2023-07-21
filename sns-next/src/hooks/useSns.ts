@@ -5,6 +5,7 @@ import { postData, putData, deleteData } from 'apis/sns'
 import { useRouter } from 'next/router'
 import { ulid } from 'ulid'
 import { auth } from 'auth/firebase'
+import { signOut } from 'firebase/auth'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { useAuth } from 'hooks/useAuth'
@@ -19,7 +20,8 @@ export const useSns = () => {
   // Context
   // contextで管理している値を取得
   const { allPosts, setAllPosts, showPosts, setShowPosts } = usePost()
-  const { firebaseUser, jsonUsers, setJsonUsers } = useAuth()
+  const { firebaseUser, jsonUsers, setJsonUsers, isLogin, setIsLogin } =
+    useAuth()
 
   // APIリクエスト先のURL
   const postsUrl = 'http://localhost:3001/posts'
@@ -301,6 +303,44 @@ export const useSns = () => {
       })
   }
 
+  // ログアウトの関数を定義
+  const logout = async () => {
+    // firebaseで用意されている、ログアウトの関数
+    await signOut(auth)
+
+    // /signinにリダイレクト
+    await router.push('/signin')
+  }
+
+  // ユーザー削除の関数を定義
+  const deleteUser = async () => {
+    // firebase側のユーザー削除
+    // thenを使うことで、firebase側のユーザー削除が完了した後に実行する処理を指定する
+    firebaseUser
+      ?.delete()
+      .then(() => {
+        // json-server側のユーザー削除
+        // 削除するユーザーのidを取得
+        const deleteTargetUserId = targetJsonUser.id
+        // Delete（Users）
+        deleteData(usersUrl, deleteTargetUserId)
+
+        // State更新
+        // idプロパティの値がdeleteTargetUserIdではないデータのみ抽出
+        const newUsers = jsonUsers?.filter((jsonUser) => {
+          return jsonUser.id !== deleteTargetUserId
+        })
+        newUsers && setJsonUsers([...newUsers])
+      })
+      .then(() => {
+        // /signinにリダイレクト
+        router.push('/signin')
+      })
+      .catch((Error) => {
+        console.log(Error)
+      })
+  }
+
   // ============================================
   // ユーザーページ
   // ============================================
@@ -369,8 +409,12 @@ export const useSns = () => {
     toggleFavorite,
     signIn,
     signUp,
+    logout,
+    deleteUser,
     changeTab,
     isOpen,
     toggleMenu,
+    isLogin,
+    setIsLogin,
   }
 }
