@@ -49,12 +49,17 @@ export const usePost = () => {
             // フォローしているユーザーの投稿を抽出
             // json-serverにおける、ログインしているユーザーデータのfollowUserIdプロパティ（配列）にidが含まれているユーザーの投稿を表示
             // = followUserId（配列）中に、post.idが入っていれば表示
-            const followsPosts = getPosts.filter((post) => {
-              return (
-                targetJsonUser.followUserId.indexOf(post.userId) !== -1 &&
-                post.replyId === ''
-              )
-            }) as PostType[]
+            let followsPosts: PostType[]
+            if (targetJsonUser.followUserId === []) {
+              followsPosts = []
+            } else {
+              followsPosts = getPosts.filter((post) => {
+                return (
+                  targetJsonUser.followUserId?.indexOf(post.userId) !== -1 &&
+                  post.replyId === ''
+                )
+              }) as PostType[]
+            }
 
             setShowPosts([...MyPosts, ...followsPosts])
           } else {
