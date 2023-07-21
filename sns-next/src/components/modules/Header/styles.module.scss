@@ -1,0 +1,45 @@
+.btn {
+  padding: 3px 7px;
+  border: none;
+  border-radius: 10px;
+  line-height: 1;
+  color: #ffffff;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.bgRed {
+  background-color: #ff0000;
+}
+
+.bgBlue {
+  background-color: #1e90ff;
+}
+
+.bgYellow {
+  background-color: #ffd700;
+}
+
+.bgOrange {
+  background-color: #ffa500;
+}
+
+.bgGreen {
+  background-color: #3cb371;
+}
+
+.bgBlack {
+  background-color: #000000;
+}
+
+.bgWhite {
+  background-color: #ffffff;
+  color: #000000;
+  border: solid 1px #000000;
+}
+
+.bgGray {
+  background-color: #a9a9a9;
+}
